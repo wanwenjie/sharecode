@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title>注册-sharecode</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta name="renderer" content="webkit">
+  <link rel="shortcut icon" href="cssimg/favicon.ico">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width, minimal-ui">
+  <link rel="stylesheet" href="css/lib.css"/>
+  <link rel="stylesheet" href="css/app.6f823326.css"/>
+
+</head>
+<body class="login">
+  <section class="content">
+    <div class="topbanner">
+    <iframe src="../jquery/jq22-code3.html" frameborder="0" width="100%" height="100%"></iframe>
+      <div class="poswrap">
+        <a class="brand" href="index.php" >
+          <h1>sharecode</h1>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-unit">
+      <form class="auth-form email-form form-horizontal" id="tform">
+        <div class="form-field">
+          <span style="color:#cc0000;" hidden="true" id="emailcheck">*请输入正确的邮箱格式</span>
+          <input type="email" name="email" id="email" placeholder="账号(邮箱)" autocomplete="off"  required class="form-control email" onchange="checkEmail();"/>
+        </div>
+        <div class="form-field">
+          <input type="text" name="user" id="name" placeholder='昵称'  autocomplete="off" required class="form-control name" />
+        </div>
+        <div class="form-field passwordClear">
+          <input type="password" name="pwd" id="pwd" autocomplete="off"  minlength=6 placeholder="密码(字母，数字，至少6位)" required class="form-control password"/>
+        </div>
+        <div class="form-field">
+          <span style="color:#cc0000;" hidden="true" id="cpwdcheck">*两次输入密码不对</span>
+          <input type="password" placeholder="再一次输入密码" id="cpwd" autocomplete="off" minlength=6 class="form-control password" onChange="check()"/>
+        </div>
+        <div class="form-field">
+          <span id="msg" style="color:#cc0000;"></span>
+        </div>
+
+        <input type="button" class="btn btn-primary anim-blue-all" onclick="reg();" value="注 册">
+          
+          <span class="icon icon-upload"></span>
+      </form>
+      <div class="login-links">
+        <div class="horizontal-line"></div>
+        <a href="login.html" class="btn btn-primary anim-blue">
+          已有账号？登录
+          <span class="icon icon-upload"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+<script>
+var span = document.getElementById('cpwdcheck');
+var emailspan = document.getElementById('emailcheck');
+  function checkEmail(){
+    var email = document.getElementById('email');
+    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
+    if(!reg.test(email.value)){
+      emailspan.hidden = false;
+    }else{
+      emailspan.hidden = true;
+    }
+  }
+
+  function check(){
+    var pwd = document.getElementById("pwd");
+    var cpwd = document.getElementById('cpwd');
+    if(cpwd.value != pwd.value){
+      span.hidden = false;
+    }else span.hidden = true;
+
+  }
+  function reg(){
+    if(emailspan.hidden==true && span.hidden==true){
+      var fm = document.getElementById('tform');
+      var fd = new FormData(fm);
+      var xhr = new XMLHttpRequest();
+      xhr.open('post','../reg.php',true);
+      xhr.send(fd);
+      xhr.onreadystatechange = function (){
+        if(this.readyState == 4){
+          document.getElementById('msg').innerHTML = this.responseText;
+        }
+      }
+    }else{
+      alert('输入不合法');
+    }
+  }
+
+</script>
+</html>

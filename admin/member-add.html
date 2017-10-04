@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>添加用户</title>
+</head>
+<body>
+<div class="container">
+  <div class="list-group" style="width:50%;margin:80px auto;">
+    <form id="tform" role="form">
+
+      <div class="form-group">
+        <input type="email" name="email" id="email" placeholder="账号(邮箱)" autocomplete="off"  required class="form-control email" autofocus />
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="user" id="name" placeholder='昵称'  autocomplete="off" required class="form-control name" />
+      </div>
+
+      <div class="form-group passwordClear">
+        <input type="password" name="pwd" id="pwd" autocomplete="off"  minlength=6 placeholder="密码(字母，数字，至少6位)" required class="form-control password"/>
+      </div>
+
+      <div class="form-group">
+        <span style="color:#cc0000;" hidden="true" id="cpwdcheck">*两次输入密码不对</span>
+        <input type="password" placeholder="再一次输入密码" id="cpwd" autocomplete="off" minlength=6 class="form-control password" onChange="check()"/>
+      </div>
+
+      <div class="form-group">
+        <span id="msg" style="color:#cc0000;"></span>
+      </div>
+
+      <div class="form-group">
+        <input type="button" class="btn btn-primary anim-blue-all" onclick="reg();" value="添 加"></div>
+
+    </form>
+  </div>
+</div>
+<script>
+  function check(){
+    var pwd = document.getElementById("pwd");
+    var cpwd = document.getElementById('cpwd');
+    var span = document.getElementById('cpwdcheck');
+    if(cpwd.value != pwd.value){
+      span.hidden = false;
+    }else span.hidden = true;
+
+  }
+  function reg(){
+    var fm = document.getElementById('tform');
+    var fd = new FormData(fm);
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','../reg.php',true);
+    xhr.send(fd);
+    xhr.onreadystatechange = function (){
+      if(this.readyState == 4){
+        document.getElementById('msg').innerHTML = this.responseText;
+      }
+    }
+    
+  }
+</script>
+</body>
+</html>

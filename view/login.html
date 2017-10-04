@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>登录-sharecode</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta name="renderer" content="webkit">
+  <link rel="shortcut icon" href="cssimg/favicon.ico">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width, minimal-ui">
+  <link rel="stylesheet" href="css/lib.css">
+  <link rel="stylesheet" href="css/app.6f823326.css"/>
+
+</head>
+<body class="login">
+  <section class="content">
+    <div class="topbanner">
+    <iframe src="http://www.jq22.com/js/a5.html" frameborder="0" width="100%" height="100%"></iframe>
+    <div class="poswrap">
+    
+      <a class="brand" href="" ><h1>sharecode</h1></a>
+    </div>
+  </div>
+    <div class="form-unit">
+      <form class="auth-form form-horizontal tb-auth" id="tform">
+        <div class="validation"></div>
+        <div class="form-field">
+          <input type="email" placeholder="账号(邮箱)" name="email" autocomplete="off" value="" class="form-control email"/>
+        </div>
+        <div class="form-field">
+          <input type="password" placeholder="密码" name="pwd" autocomplete="off" class="form-control password" />
+        </div>
+
+         <div class="form-field">
+          <input type="text" placeholder="验证码" name="code" autocomplete="off" class="form-control password" />
+        </div>
+
+        <div class="form-field">
+          <img src="../tools/gd.php" alt="验证码" style="border:1px solid #D1D1D1;border-radius:2px;margin-bottom:20px;"><a href="javascript:change();">看不清？换一张</a>
+        </div>
+        <span id="sp" style="color:#cc0000;"></span>
+        <input type="button" class="btn btn-primary anim-blue-all" value="登录" onclick="login();">
+          <span class="icon icon-upload"></span>
+
+
+        <div class="horizontal-line"></div>
+        <div class="tb-auth">
+
+          <a href="register.html" class="btn btn-primary anim-blue">
+            还没有账号？免费注册
+            <span class="icon icon-upload"></span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+<script>
+  function change(){
+    var img = document.getElementsByTagName('img')[0];
+    img.src = img.src + "?" + Math.random();
+  }
+
+  function login(){
+    var fm = document.getElementById('tform');
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData(fm);
+
+    xhr.open('POST','../login.php',true);
+    xhr.onreadystatechange = function (){
+      if(this.readyState == 4){
+        document.getElementById('sp').innerHTML = this.responseText;
+        if(this.responseText == "登录成功,正在跳转......"){
+          window.location.href = "user.php";
+        }
+        if(this.responseText == "*验证码错误"){
+          window.location.reload();
+        }
+      }
+    }
+    xhr.send(fd);
+  }
+
+</script>
+</html>

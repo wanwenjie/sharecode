@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<title>CSS3 3D折叠菜单导航 | jQuery特效|手机微信网站特效| 网页特效库</title>
+<meta name="keywords" content="SVG特效, 手机微信网站特效, css3动画, html5特效, 网页特效" />
+<meta name="description" content="网页特效库-专注于HTML5、CSS3、js、jQuery、手机移动端等网页特效的手机与分享。特效库始终坚持：无会员、无积分、无限制的“三无原则”，所有的资源都免费提供广大童鞋下载学习和使用。" />
+<style>
+*{margin:0px;padding:0px;}
+body{background:#b1b1b1;margin:0px;padding:0px;font-size:14px;color:#000;}
+.tips{width:702px;margin:0 auto; height: 50px; line-height: 50px; text-align: center; font-family: "微软雅黑"; font-size: 30px; padding: 25px 0px;}
+.bredcolor{color:#fff;}
+.produter {width:250px; height:35px; margin:0 auto 450px auto; position:relative; z-index:100;
+	-webkit-perspective:400px;
+	-moz-perspective:400px;
+	perspective:400px;
+	-webkit-perspective-origin: 50% 100%;
+	-moz-perspective-origin: 50% 100%;
+	perspective-origin: 50% 100%;
+}
+/* produter下所有div的统一设置 */
+.produter div {position:absolute; padding:10px;
+	-webkit-transform-style:preserve-3d;
+	-moz-transform-style:preserve-3d;
+	transform-style:preserve-3d;
+	top:100%; left:0; width:230px;
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+
+.produter .odd {background:#ddd;
+	-moz-transform:rotateX(-180deg);
+	-webkit-transform:rotateX(-180deg);
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+}
+.produter .even {background:#eee;
+	-moz-transform:rotateX(180deg);
+	-webkit-transform:rotateX(180deg);
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+}
+.produter .first {background:#ddd;
+	-moz-transform:rotateX(-100deg);
+	-webkit-transform:rotateX(-100deg);
+	-webkit-transition: 0.6s;
+	-moz-transition: 0.6s;
+	-o-transition: 0.6s;
+	transition: 0.6s;
+}
+.produter .last {box-shadow:0 15px 10px -10px rgba(0,0,0,0.3); border-radius: 0 0 10px 10px;}
+.produter:hover .sub {
+	-moz-transform:rotateX(0deg);
+	-webkit-transform:rotateX(0deg);
+}
+
+.produter .sub img {display:block; float:left; padding:0 10px 10px 0; width: 48px; height: 48px;}
+.produter .sub p {font: normal 12px/15px arial, sans-serif; color:#000; padding:0; margin:0;}
+.produter .sub p span {display:block; font: bold 14px/18px arial, sans-serif; color:#069;}
+.produter .sub p a {font: normal 12px/15px arial, sans-serif; color:#09c;}
+.produter .sub p a:hover {text-decoration:none;}
+.produter a.main {display:block; font: bold 15px/35px arial, sans-serif; text-align:center; text-decoration:none; color:#fff; background:#069; border-radius:10px 10px 0 0; position:relative; z-index:100;}
+</style>
+</head>
+<body>
+<section class="tips"></section>
+<div class="produter"><a class="main" href="#url">CSS3 3D折叠菜单导航</a>
+	<div class="sub first">
+		<img src="html.png" alt=""><p><span>网页特效库</span>专注于HTML5、CSS3、js、jQuery、手机移动端等网页特效的手机与分享。</p>
+			<div class="sub even"><img src="html1.png" alt=""><p><span>jQuery导航菜单</span>导航栏是指位于页眉区域的，在页眉横幅图片上边或下边的一排水平导航按钮......</p>
+				<div class="sub odd"><img src="html2.png" alt=""><p><span>瀑布流</span>瀑布流，又称瀑布流式布局。是比较流行的一种网站页面布局，视觉表现为参差不......</p>
+					<div class="sub even"><img src="html3.png" alt=""><p><span>响应式</span>响应式布局是Ethan Marcotte在2010年5月份提出的一个概念......</p>
+						<div class="sub odd last"><img src="html4.png" alt=""><p><span>视差滚动</span>视差滚动（Parallax Scrolling）是指让......</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+<div style="width: 100%; height: 50px; line-height: 50px; text-align: center;">
+	更多网页特效，请访问<a href="http://www.5iweb.com.cn"><b>网页特效库</b></a>,欢迎加入网页特效库QQ交流群：258242983
+</div>
+<div style="width: 220px; height: 150px; position: fixed; z-index: 1000; right: 0px;top:0px; background: #fff;">
+	<script type="text/javascript">
+	    var cpro_id = "u2586467";
+	</script>
+	<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

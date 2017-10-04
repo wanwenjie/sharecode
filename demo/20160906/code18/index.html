@@ -1,0 +1,170 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  display: inline-block;
+}
+
+    </style>
+    	
+</head>
+<body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5.1/dat.gui.js"></script>
+<canvas></canvas>
+</body>
+<script>
+        'use strict';
+
+var options = {
+  angle: 137.5, // favorite angle <3
+  n: 0,
+  circleRadius: 20,
+  colors: true,
+  fade: true,
+  scaleFactor: 14,
+  circleScale: true
+};
+
+var circleRadius = options.circleRadius;
+var circles = [];
+var w = window.innerWidth;
+var h = window.innerHeight;
+var w2 = w / 2;
+var h2 = h / 2;
+
+var canvas = document.querySelector('canvas');
+var ctx = canvas.getContext('2d');
+var gui = new dat.GUI();
+var guiCircleRadius = gui.add(options, 'circleRadius', 1, 20);
+var guiScaleFactor = gui.add(options, 'scaleFactor', 2, 20);
+var guiAngle = gui.add(options, 'angle', [90, 137.3, 137.5, 137.6, 180]);
+var guiCircleScale = gui.add(options, 'circleScale');
+var guiColors = gui.add(options, 'colors');
+var guiFade = gui.add(options, 'fade');
+
+var clear = function clear() {
+  ctx.fillStyle = 'hsla(0, 0%, 0%, 1)';
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.shadowColor = 'black';
+  ctx.shadowBlur = 5;
+};
+
+var create = function create() {
+  var dist = 0;
+  var hypo = w2 > h2 ? h2 : w2;
+
+  while (dist < hypo) {
+    var a = options.n * options.angle;
+    var r = options.scaleFactor * Math.sqrt(options.n);
+    var x = r * Math.cos(a);
+    var y = r * Math.sin(a);
+    var alpha = options.fade ? 1 - dist / hypo : 1;
+    var fill = options.colors ? 'hsla(' + a * (180 / Math.PI) + ', 100%, 50%, ' + alpha + ')' : 'rgba(255, 255, 255, ' + alpha + ')';
+
+    circles.push({ x: x, y: y, circleRadius: circleRadius, fill: fill });
+
+    dist = Math.sqrt(x * x + y * y);
+
+    if (options.circleScale) {
+      circleRadius = options.circleRadius - options.circleRadius * (dist / hypo);
+    }
+
+    options.n += 1;
+  }
+};
+
+var rotation = 0.01;
+var loop = function loop() {
+  clear();
+
+  var num = circles.length;
+
+  ctx.save();
+  ctx.translate(w2, h2);
+  ctx.rotate(rotation);
+
+  while (num--) {
+    var circle = circles[num];
+
+    ctx.beginPath();
+    ctx.fillStyle = circle.fill;
+    ctx.arc(circle.x, circle.y, circle.circleRadius, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  rotation -= 0.001;
+
+  ctx.restore();
+  requestAnimationFrame(loop);
+};
+
+var reset = function reset() {
+  w = Math.min(window.innerWidth, 500);
+  h = Math.min(window.innerHeight, 500);
+  w2 = w / 2;
+  h2 = h / 2;
+
+  canvas.width = w;
+  canvas.height = h;
+
+  options.n = 0;
+  circleRadius = options.circleRadius;
+  circles = [];
+
+  clear();
+  create();
+};
+
+window.addEventListener('resize', reset);
+reset();
+loop();
+
+guiCircleRadius.onFinishChange(reset);
+guiCircleScale.onFinishChange(reset);
+guiScaleFactor.onFinishChange(reset);
+guiAngle.onFinishChange(reset);
+guiColors.onFinishChange(reset);
+guiFade.onFinishChange(reset);
+</script>
+</html>

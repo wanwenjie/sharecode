@@ -1,0 +1,14 @@
+<form class="input-group" action="search.php">
+   <input type="text" class="form-control" placeholder="请输入关键词" name="search">
+   <span class="input-group-btn">
+      <input class="btn btn-info" type="submit" value="搜索">
+   </span>
+</form>
+ <div class="panel panel-default" style="border:1px solid #eee;border-radius:4px;"> 
+    <ul class="list-group">
+       <a href="new.php?order=date" class="list-group-item">&nbsp;<span class="glyphicon glyphicon-flag"></span>&nbsp;最新发布</a>
+       <a href="new.php?order=collect" class="list-group-item">&nbsp;<span class="glyphicon glyphicon-heart"></span>&nbsp;最多收藏</a>
+       <a href="new.php?order=skim" class="list-group-item">&nbsp;<span class="glyphicon glyphicon-eye-open"></span>&nbsp;最多浏览</a>
+       <a href="new.php?order=down" class="list-group-item">&nbsp;<span class="glyphicon glyphicon-cloud-download"></span>&nbsp;最多下载</a>
+    </ul>
+ </div>

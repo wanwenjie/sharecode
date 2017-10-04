@@ -1,0 +1,855 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        html {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  background-color: #131417;
+}
+
+.box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/537051/smoke_texture2714-min.jpg") center center no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 50px 0 rgba(75, 27, 27, 0.7);
+  z-index: 1;
+  overflow: hidden;
+}
+.box__row-cell {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 24%;
+  height: 29%;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-transition: all 400ms 600ms, width 300ms 300ms, background-color 300ms 600ms;
+  transition: all 400ms 600ms, width 300ms 300ms, background-color 300ms 600ms;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 2;
+}
+.box__row-cell:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  -webkit-transition: 500ms;
+  transition: 500ms;
+}
+.box__row-cell:before {
+  content: '';
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-color: transparent;
+  opacity: 1;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  z-index: -3;
+}
+.box__row-cell:hover:before {
+  background-color: #F25555;
+}
+.box__row-cell-info {
+  margin-left: 20px;
+  width: 100px;
+  color: #fff;
+  -webkit-transition: 400ms 850ms;
+  transition: 400ms 850ms;
+}
+.box__row-cell-info-ep {
+  margin-top: 25px;
+  font-size: 10px;
+}
+.box__row-cell-info-ep span {
+  padding-left: 10px;
+}
+@media screen and (max-height: 915px) {
+  .box__row-cell-info-ep {
+    margin-top: 10px;
+  }
+}
+.box__row-cell-info-title {
+  letter-spacing: 2px;
+  margin-top: 15px;
+  font-size: 20px;
+}
+@media screen and (max-height: 692px) {
+  .box__row-cell-info-title {
+    margin-top: 8px;
+    font-size: 18px;
+  }
+}
+@media screen and (max-height: 692px) {
+  .box__row-cell-info-title {
+    font-size: 16px;
+    margin-top: 4px;
+  }
+}
+.box__row-cell-info-sign {
+  margin: 15px 0 0 2px;
+  height: 3px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 1px;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  z-index: 10;
+}
+@media screen and (max-height: 800px) {
+  .box__row-cell-info-sign {
+    margin-top: 10px;
+  }
+}
+.box__row-cell-info--time {
+  position: absolute;
+  bottom: 18px;
+  font-size: 10px;
+}
+@media screen and (max-height: 650px) {
+  .box__row-cell-info--time {
+    right: 20px;
+    text-align: right;
+  }
+}
+.box__row-cell-info--full {
+  -webkit-transform: translateX(-50px);
+          transform: translateX(-50px);
+  opacity: 0;
+  margin: 50px 0 0 90px;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+.box__row-cell-info--full-heading {
+  line-height: 60px;
+  width: 300px;
+  color: #131313;
+  font-size: 60px;
+  font-weight: 900;
+}
+.box__row-cell-info--full-par {
+  padding-top: 50px;
+  color: #fff;
+}
+.box__row-cell:nth-child(2) {
+  left: 75%;
+}
+.box__row-cell:nth-child(3) {
+  left: 100%;
+}
+.box__row:nth-child(2) .box__row-cell {
+  top: 67.5%;
+}
+.box__row:nth-child(3) .box__row-cell {
+  top: 100%;
+}
+.box__content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  background-color: #1C1E22;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  opacity: 0;
+  z-index: -10;
+  -webkit-transition: all 400ms 600ms, z-index 0ms 0ms;
+  transition: all 400ms 600ms, z-index 0ms 0ms;
+}
+.box__content-wrapper {
+  position: relative;
+  margin-left: auto;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+.box__content-inner {
+  position: absolute;
+  left: 18px;
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  opacity: 0;
+  -webkit-transition: 400ms, opacity 200ms;
+  transition: 400ms, opacity 200ms;
+}
+.box__content-text {
+  padding: 20px 0 30px 8px;
+  width: 300px;
+  max-width: 100%;
+  color: #ababab;
+}
+.box__content-text-heading {
+  position: relative;
+  margin: 50px 0 20px 0;
+  color: #f5f5f5;
+  font-size: 16px;
+}
+.box__content-text-heading:after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: #a73c3c;
+  box-shadow: 0 0 1px 0 #a73c3c;
+}
+.box__content-text-par {
+  line-height: 22px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+.box__content-text-list {
+  list-style-type: none;
+}
+.box__content-text-item {
+  padding-bottom: 3px;
+  font-size: 14px;
+}
+.box__content-text-link {
+  text-decoration: none;
+  color: #ababab;
+  font-size: 14px;
+}
+.box__content-text-link:hover {
+  text-decoration: underline;
+}
+.box__close {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+  height: 20px;
+  width: 20px;
+  font-size: 0;
+  cursor: pointer;
+  z-index: 9999;
+}
+.box__close:after, .box__close:before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: -14px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  width: 35px;
+  height: 2px;
+  background-color: #fff;
+  opacity: 0;
+  -webkit-transition: 500ms;
+  transition: 500ms;
+}
+.box__close:before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.box__close span {
+  position: relative;
+  display: inline-block;
+  margin: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-transition: 400ms 500ms;
+  transition: 400ms 500ms;
+}
+.box__close span:nth-child(6) {
+  right: 6px;
+}
+.box__close span:nth-child(7) {
+  right: 6px;
+}
+.box__close span:nth-child(8) {
+  right: 6px;
+}
+.box__close span:nth-child(9) {
+  right: 6px;
+}
+.box__close span:nth-child(10) {
+  right: 6px;
+}
+.box__episodes {
+  position: absolute;
+  top: 28%;
+  right: 15px;
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+.box__episodes:after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: 2px;
+  width: 15px;
+  height: 1px;
+  background-color: #fff;
+}
+.box__smokebg {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  -webkit-transform: translate3d(0, 0, 0) rotate(0.01deg);
+          transform: translate3d(0, 0, 0) rotate(0.01deg);
+  width: 120%;
+  height: 120%;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/537051/smoke-min.png") center center no-repeat;
+  background-size: cover;
+  z-index: -10;
+  opacity: .5;
+  -webkit-animation: smokebg 60s infinite alternate;
+          animation: smokebg 60s infinite alternate;
+}
+@-webkit-keyframes smokebg {
+  25% {
+    -webkit-transform: translate3d(100px, 0, 0) rotate(0.01deg);
+            transform: translate3d(100px, 0, 0) rotate(0.01deg);
+  }
+  50% {
+    -webkit-transform: translate3d(75px, -25px, 0) rotate(0.01deg);
+            transform: translate3d(75px, -25px, 0) rotate(0.01deg);
+  }
+  75% {
+    -webkit-transform: translate3d(45px, 30px, 0) rotate(0.01deg);
+            transform: translate3d(45px, 30px, 0) rotate(0.01deg);
+  }
+  100% {
+    -webkit-transform: translate3d(25px, -15px, 0) rotate(0.01deg);
+            transform: translate3d(25px, -15px, 0) rotate(0.01deg);
+  }
+}
+@keyframes smokebg {
+  25% {
+    -webkit-transform: translate3d(100px, 0, 0) rotate(0.01deg);
+            transform: translate3d(100px, 0, 0) rotate(0.01deg);
+  }
+  50% {
+    -webkit-transform: translate3d(75px, -25px, 0) rotate(0.01deg);
+            transform: translate3d(75px, -25px, 0) rotate(0.01deg);
+  }
+  75% {
+    -webkit-transform: translate3d(45px, 30px, 0) rotate(0.01deg);
+            transform: translate3d(45px, 30px, 0) rotate(0.01deg);
+  }
+  100% {
+    -webkit-transform: translate3d(25px, -15px, 0) rotate(0.01deg);
+            transform: translate3d(25px, -15px, 0) rotate(0.01deg);
+  }
+}
+.box__title {
+  position: absolute;
+  top: 25%;
+  left: 9%;
+}
+.box__title-heading {
+  position: relative;
+  color: #7b2222;
+  letter-spacing: 3px;
+  line-height: 65px;
+  font-size: 65px;
+}
+.box__title-heading:after {
+  content: '';
+  position: absolute;
+  top: 170px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  box-shadow: 0 0 1px 0 #000;
+  background-color: #000;
+}
+.box__title-heading span {
+  letter-spacing: 6px;
+  color: #fff;
+}
+.box__title-par {
+  text-transform: uppercase;
+  margin-top: 35%;
+  color: #7b2222;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.active {
+  left: 0 !important;
+  top: 0 !important;
+  height: 100%;
+  width: 50%;
+  background-color: #F25555;
+  z-index: 5;
+  -webkit-transition: all 400ms 400ms, width 300ms 800ms;
+  transition: all 400ms 400ms, width 300ms 800ms;
+  cursor: default;
+  opacity: 1 !important;
+}
+.active .box__row-cell-info:nth-child(1) {
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+  opacity: 0;
+  -webkit-transition: 300ms 0ms ease-in, opacity 375ms 0ms;
+  transition: 300ms 0ms ease-in, opacity 375ms 0ms;
+}
+.active .box__row-cell-info:nth-child(2) {
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+  opacity: 0;
+  -webkit-transition: 300ms 50ms ease-in, opacity 375ms 50ms;
+  transition: 300ms 50ms ease-in, opacity 375ms 50ms;
+}
+.active .box__row-cell-info:nth-child(3) {
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+  opacity: 0;
+  -webkit-transition: 300ms 100ms ease-in, opacity 375ms 100ms;
+  transition: 300ms 100ms ease-in, opacity 375ms 100ms;
+}
+.active .box__row-cell-info:nth-child(4) {
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+  opacity: 0;
+  -webkit-transition: 300ms 150ms ease-in, opacity 375ms 150ms;
+  transition: 300ms 150ms ease-in, opacity 375ms 150ms;
+}
+.active .box__row-cell-info--full {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  opacity: 1;
+  -webkit-transition: 300ms 900ms;
+  transition: 300ms 900ms;
+}
+
+.cell-fade {
+  opacity: 0;
+  -webkit-transition: all 400ms 400ms, width 300ms 800ms, opacity 200ms 300ms;
+  transition: all 400ms 400ms, width 300ms 800ms, opacity 200ms 300ms;
+}
+
+.hover-cell:after {
+  opacity: 1;
+}
+
+.show-content {
+  opacity: 1;
+  z-index: 2;
+  -webkit-transition: all 300ms 400ms, z-index 0ms 0ms;
+  transition: all 300ms 400ms, z-index 0ms 0ms;
+}
+.show-content .box__content-inner {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  opacity: 1;
+  -webkit-transition: 300ms 1100ms;
+  transition: 300ms 1100ms;
+}
+
+.box-close-active:after, .box-close-active:before {
+  opacity: 1;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  -webkit-transition: 500ms 800ms;
+  transition: 500ms 800ms;
+}
+.box-close-active:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.box-close-active span {
+  opacity: 0;
+  -webkit-transition: 0ms 800ms;
+  transition: 0ms 800ms;
+}
+
+    </style>
+    	
+</head>
+<body>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+<div class="container">
+  <div class="box">
+    <div class="box__row">
+      <div data-cell='1' class="box__row-cell">
+        <div class="box__row-cell-info">
+          <p class='box__row-cell-info-ep'>EP <span>04</span></p>
+        </div>
+        <div class="box__row-cell-info">
+          <p class='box__row-cell-info-title'>Proxima Nova is Over</p>
+        </div>
+        <div class="box__row-cell-info">
+          <div class="box__row-cell-info-sign"></div>
+        </div>
+        <div class="box__row-cell-info box__row-cell-info--time">
+          <p>43 minutes</p>
+        </div>
+        <div class="box__row-cell-info--full">
+          <h1 class="box__row-cell-info--full-heading">Proxima Nova is Over</h1>
+          <p class="box__row-cell-info--full-par">
+            Seriously though, it's over.
+          </p>
+        </div>
+      </div>
+
+
+      <div data-cell='2' class="box__row-cell">
+        <div class="box__row-cell-info">
+          <p class=' box__row-cell-info-ep'>EP <span>03</span></p>
+        </div>
+        <div class="box__row-cell-info">
+          <p class=' box__row-cell-info-title'>Proxima Nova is Over</p>
+        </div>
+        <div class="box__row-cell-info">
+          <div class="box__row-cell-info-sign"></div>
+        </div>
+        <div class="box__row-cell-info box__row-cell-info--time">
+          <p>44 minutes</p>
+        </div>
+        <div class="box__row-cell-info--full">
+          <h1 class="box__row-cell-info--full-heading">Proxima Nova is Over</h1>
+          <p class="box__row-cell-info--full-par">
+            Seriously though, it's over.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box__row">
+      <div data-cell='3' class="box__row-cell">
+        <div class="box__row-cell-info">
+          <p class=' box__row-cell-info-ep'>EP <span>02</span></p>
+        </div>
+        <div class="box__row-cell-info">
+          <p class=' box__row-cell-info-title'>Proxima Nova is Over</p>
+        </div>
+        <div class="box__row-cell-info">
+          <div class="box__row-cell-info-sign"></div>
+        </div>
+        <div class="box__row-cell-info box__row-cell-info--time">
+          <p>41 minutes</p>
+        </div>
+        <div class="box__row-cell-info--full">
+          <h1 class="box__row-cell-info--full-heading">Proxima Nova is Over</h1>
+          <p class="box__row-cell-info--full-par">
+            Seriously though, it's over.
+          </p>
+        </div>
+      </div>
+
+      <div data-cell='4' class="box__row-cell">
+        <div class="box__row-cell-info">
+          <p class=' box__row-cell-info-ep'>EP <span>01</span></p>
+        </div>
+        <div class="box__row-cell-info">
+          <p class=' box__row-cell-info-title'>Proxima Nova is Over</p>
+        </div>
+        <div class="box__row-cell-info">
+          <div class="box__row-cell-info-sign"></div>
+        </div>
+        <div class="box__row-cell-info box__row-cell-info--time">
+          <p>42 minutes</p>
+        </div>
+        <div class="box__row-cell-info--full">
+          <h1 class="box__row-cell-info--full-heading">Proxima Nova is Over</h1>
+          <p class="box__row-cell-info--full-par">
+            Seriously though, it's over.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div data-content='1' class="box__content">
+      <div class="box__content-wrapper">
+        <div class="box__content-inner">
+          <div class="box__content-text">
+            <h2 class='box__content-text-heading'>SYNOPSIS - 43 MIN</h2>
+            <p class='box__content-text-par'>
+              Suspendisse non orci porta, consectetur tellus in, gravida felis. Aenean vel posuere lacus. Quisque eget rutrum elit. In eu tortor eget velit scelerisque porttitor.
+            </p>
+            <p class='box__content-text-par'>
+              Morbi nisl metus, hendrerit eget ante sed, consequat egestas urna. Quisque et rutrum ligula, eu rutrum ex. Nunc neque mauris, laoreet eu auctor vitae, rutrum molestie dolor. Pellentesque vel vulputate elit, quis rhoncus sapien.
+            </p>
+            <h2 class='box__content-text-heading'>SHOW NOTES</h2>
+            <ul class='box__content-text-list'>
+              <li class='box__content-text-item'>
+                Vitae ultrices
+              </li>
+              <li class='box__content-text-item'>
+                Aenean vel
+              </li>
+              <li class='box__content-text-item'>
+                Ut condimentum
+              </li>
+              <li class='box__content-text-item'>
+                Aenean metus
+              </li>
+              <li class='box__content-text-item'>
+                Quisque sodales
+              </li>
+              <li class='box__content-text-item'>
+                Accumsan metus
+              </li>
+            </ul>
+            <h2 class='box__content-text-heading'>FOLLOW</h2>
+            <a class='box__content-text-link' href="https://twitter.com/mrspok407" target='_blank'>mrspok407 | @mrspok407</a><br>
+            <a class='box__content-text-link' href="http://codepen.io/mrspok407/" target='_blank'>Checkout my other pens</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-content='2' class="box__content">
+      <div class="box__content-wrapper">
+        <div class="box__content-inner">
+          <div class="box__content-text">
+            <h2 class='box__content-text-heading'>SYNOPSIS - 44 MIN</h2>
+            <p class='box__content-text-par'>
+              Suspendisse non orci porta, consectetur tellus in, gravida felis. Aenean vel posuere lacus. Quisque eget rutrum elit. In eu tortor eget velit scelerisque porttitor.
+            </p>
+            <p class='box__content-text-par'>
+              Morbi nisl metus, hendrerit eget ante sed, consequat egestas urna. Quisque et rutrum ligula, eu rutrum ex. Nunc neque mauris, laoreet eu auctor vitae, rutrum molestie dolor. Pellentesque vel vulputate elit, quis rhoncus sapien.
+            </p>
+            <h2 class='box__content-text-heading'>SHOW NOTES</h2>
+            <ul class='box__content-text-list'>
+              <li class='box__content-text-item'>
+                Vitae ultrices
+              </li>
+              <li class='box__content-text-item'>
+                Aenean vel
+              </li>
+              <li class='box__content-text-item'>
+                Ut condimentum
+              </li>
+              <li class='box__content-text-item'>
+                Aenean metus
+              </li>
+              <li class='box__content-text-item'>
+                Quisque sodales
+              </li>
+              <li class='box__content-text-item'>
+                Accumsan metus
+              </li>
+            </ul>
+            <h2 class='box__content-text-heading'>FOLLOW</h2>
+            <a class='box__content-text-link' href="https://twitter.com/mrspok407" target='_blank'>mrspok407 | @mrspok407</a><br>
+            <a class='box__content-text-link' href="http://codepen.io/mrspok407/" target='_blank'>Checkout my other pens</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-content='3' class="box__content">
+      <div class="box__content-wrapper">
+        <div class="box__content-inner">
+          <div class="box__content-text">
+            <h2 class='box__content-text-heading'>SYNOPSIS - 41 MIN</h2>
+            <p class='box__content-text-par'>
+              Suspendisse non orci porta, consectetur tellus in, gravida felis. Aenean vel posuere lacus. Quisque eget rutrum elit. In eu tortor eget velit scelerisque porttitor.
+            </p>
+            <p class='box__content-text-par'>
+              Morbi nisl metus, hendrerit eget ante sed, consequat egestas urna. Quisque et rutrum ligula, eu rutrum ex. Nunc neque mauris, laoreet eu auctor vitae, rutrum molestie dolor. Pellentesque vel vulputate elit, quis rhoncus sapien.
+            </p>
+            <h2 class='box__content-text-heading'>SHOW NOTES</h2>
+            <ul class='box__content-text-list'>
+              <li class='box__content-text-item'>
+                Vitae ultrices
+              </li>
+              <li class='box__content-text-item'>
+                Aenean vel
+              </li>
+              <li class='box__content-text-item'>
+                Ut condimentum
+              </li>
+              <li class='box__content-text-item'>
+                Aenean metus
+              </li>
+              <li class='box__content-text-item'>
+                Quisque sodales
+              </li>
+              <li class='box__content-text-item'>
+                Accumsan metus
+              </li>
+            </ul>
+            <h2 class='box__content-text-heading'>FOLLOW</h2>
+            <a class='box__content-text-link' href="https://twitter.com/mrspok407" target='_blank'>mrspok407 | @mrspok407</a><br>
+            <a class='box__content-text-link' href="http://codepen.io/mrspok407/" target='_blank'>Checkout my other pens</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-content='4' class="box__content">
+      <div class="box__content-wrapper">
+        <div class="box__content-inner">
+          <div class="box__content-text">
+            <h2 class='box__content-text-heading'>SYNOPSIS - 42 MIN</h2>
+            <p class='box__content-text-par'>
+              Suspendisse non orci porta, consectetur tellus in, gravida felis. Aenean vel posuere lacus. Quisque eget rutrum elit. In eu tortor eget velit scelerisque porttitor.
+            </p>
+            <p class='box__content-text-par'>
+              Morbi nisl metus, hendrerit eget ante sed, consequat egestas urna. Quisque et rutrum ligula, eu rutrum ex. Nunc neque mauris, laoreet eu auctor vitae, rutrum molestie dolor. Pellentesque vel vulputate elit, quis rhoncus sapien.
+            </p>
+            <h2 class='box__content-text-heading'>SHOW NOTES</h2>
+            <ul class='box__content-text-list'>
+              <li class='box__content-text-item'>
+                Vitae ultrices
+              </li>
+              <li class='box__content-text-item'>
+                Aenean vel
+              </li>
+              <li class='box__content-text-item'>
+                Ut condimentum
+              </li>
+              <li class='box__content-text-item'>
+                Aenean metus
+              </li>
+              <li class='box__content-text-item'>
+                Quisque sodales
+              </li>
+              <li class='box__content-text-item'>
+                Accumsan metus
+              </li>
+            </ul>
+            <h2 class='box__content-text-heading'>FOLLOW</h2>
+            <a class='box__content-text-link' href="https://twitter.com/mrspok407" target='_blank'>mrspok407 | @mrspok407</a><br>
+            <a class='box__content-text-link' href="http://codepen.io/mrspok407/" target='_blank'>Checkout my other pens</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box__close">
+      <span></span><br>
+      <span></span>
+      <span></span><br>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="box__episodes">EPISODES</div>
+    <div class='box__smokebg'>
+
+    </div>
+    <div class='box__title'>
+      <h1 class='box__title-heading'>LOREM<br>
+        <span>IPSUM</span></h1>
+      <p class='box__title-par'>egestas sapien</p>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+        $(document).ready(function() {
+  var animation = false,
+    animDur = 1000,
+    $row = $('.box__row'),
+    $cell = $('.box__row-cell'),
+    $content = $('.box__content'),
+    $closeBtn = $('.box__close');
+
+  var active = function() {
+    if (!animation) {
+      animation = true;
+      var cellData = $(this).data('cell');
+      var $content = $('.box__content[data-content=' + cellData + ']');
+
+      $cell.addClass('cell-fade');
+      $(this).addClass('active');
+      $content.addClass('show-content');
+      $closeBtn.addClass('box-close-active');
+    }
+
+    setTimeout(function() {
+      animation = false;
+    }, animDur);
+  }
+
+  var close = function() {
+    animation = true;
+    $cell.removeClass('active cell-fade');
+    $content.removeClass('show-content');
+    $(this).removeClass('box-close-active');
+
+    setTimeout(function() {
+      animation = false;
+    }, animDur);
+  }
+
+  $row.on('click', '.box__row-cell', active);
+  $closeBtn.on('click', close);
+  $cell.on({
+    mouseenter: function() {
+      $cell.addClass('hover-cell');
+      $(this).removeClass('hover-cell');
+    },
+    mouseleave: function() {
+      $cell.removeClass('hover-cell');
+    }
+  });
+});
+</script>
+</html>

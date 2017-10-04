@@ -1,0 +1,337 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        @import "https://fonts.googleapis.com/css?family=Roboto:400,700";
+body {
+  padding: 100px 0;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  background: #17263f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 0 40px;
+  text-align: center;
+}
+
+.pie-chart {
+  max-width: 300px;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+.pie-chart + .pie-chart {
+  margin-left: 40px;
+}
+.pie-chart .max-circ {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  padding-top: 80px;
+  border-radius: 50%;
+  background: #20405f;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.3), 0 0 7px rgba(255, 255, 255, 0.8);
+}
+.pie-chart .max-circ span {
+  display: block;
+}
+.pie-chart .max-circ .label {
+  font-size: 11px;
+  margin: 0 0 10px;
+}
+.pie-chart .max-circ .value {
+  font-size: 24px;
+  font-weight: 700;
+  -webkit-filter: brightness(1.4);
+          filter: brightness(1.4);
+}
+.pie-chart .legend {
+  margin: 20px 0 0;
+  font-size: 12px;
+  text-align: center;
+}
+.pie-chart .legend li {
+  margin: 0 5px 10px;
+  padding: 8px 8px 5px;
+  border-radius: 1px;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ddd;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.5);
+  -webkit-transition: background 0.2s, opacity 0.2s;
+  transition: background 0.2s, opacity 0.2s;
+}
+.pie-chart .legend li span {
+  color: #fff;
+  font-weight: 700;
+}
+.pie-chart .slice {
+  cursor: pointer;
+  -webkit-filter: brightness(1) grayscale(0.15);
+          filter: brightness(1) grayscale(0.15);
+  -webkit-transition: -webkit-transform 0.2s, -webkit-filter 0.2s;
+  transition: -webkit-transform 0.2s, -webkit-filter 0.2s;
+  transition: transform 0.2s, filter 0.2s;
+  transition: transform 0.2s, filter 0.2s, -webkit-transform 0.2s, -webkit-filter 0.2s;
+}
+.pie-chart .slice path {
+  opacity: 0.75;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+.pie-chart .slice text {
+  font-size: 14px;
+}
+.pie-chart .slice:hover, .pie-chart .slice.max {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-filter: brightness(1.4) grayscale(0);
+          filter: brightness(1.4) grayscale(0);
+}
+.pie-chart .slice:hover path, .pie-chart .slice.max path {
+  opacity: 1;
+}
+
+    </style>
+    	
+</head>
+<body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<div class="container">
+  <div id="chart-2" data-pie="piedata2" data-pie-label="Shoppers by Gender"></div>
+  <div id="chart" data-pie="piedata" data-pie-label="Shoppers by Age"></div>
+</div>
+</body>
+<script>
+        var gradients = [{
+  id: 'pink',
+  start: '#b34f53',
+  end: '#dd5b59'
+}, {
+  id: 'blue',
+  start: '#095a82',
+  end: '#0170a7'
+}, {
+  id: 'red',
+  start: '#874d2a',
+  end: '#a55724'
+}, {
+  id: 'green',
+  start: '#5b7964',
+  end: '#869d8d'
+}, {
+  id: 'aqua',
+  start: '#3f6071',
+  end: '#588094'
+}, {
+  id: 'other',
+  start: '#2272ad',
+  end: '#308cd0'
+}];
+
+var data = [];
+
+data['piedata'] = [{
+  label: "18-24",
+  value: 25,
+  color: 'red'
+}, {
+  label: "25-34",
+  value: 22,
+  color: 'blue'
+}, {
+  label: "35-44",
+  value: 31,
+  color: 'pink'
+}, {
+  label: "45-54",
+  value: 14,
+  color: 'green'
+}, {
+  label: "55-64",
+  value: 6,
+  color: 'other'
+}, {
+  label: "65+",
+  value: 2,
+  color: 'aqua'
+}];
+
+data['piedata2'] = [{
+  label: "Male",
+  value: 54,
+  color: 'blue'
+}, {
+  label: "Female",
+  value: 46,
+  color: 'pink'
+}];
+
+$(document).ready(function() {
+  $('[data-pie]').each(function() {
+    var chartId = '#' + $(this).attr('id');
+    var chartLabel = $(this).attr('data-pie-label');
+    var piedata = data[$(this).attr('data-pie')];
+
+    var width = 300,
+      height = 300,
+      radius = 140;
+
+    var pie = d3.layout.pie()
+      .value(function(d) {
+        return d.value;
+      })
+      .sort(null);
+
+    var arc = d3.svg.arc()
+      .outerRadius(radius)
+      .innerRadius(radius / 1.5);
+
+    var max = d3.max(piedata, function(d) {
+      return +d.value;
+    });
+
+    var myChart = d3.select(chartId).append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .append('g')
+      .attr('transform', 'translate(' + (width / 2) + ', ' + (height / 2) + ')')
+      .selectAll('path').data(pie(piedata))
+      .enter().append('g')
+      .attr('class', function(d, i) {
+        var cssClass = 'slice';
+        if (d.data.value === max) {
+          cssClass += ' max';
+        }
+        return cssClass;
+      });
+
+    var gradient = d3.select(chartId + ' svg')
+      .selectAll('linearGradient').data(gradients)
+      .enter().append('linearGradient')
+      .attr('id', function(d, i) {
+        return gradients[i].id;
+      });
+
+    gradient.append('stop')
+      .attr('offset', '0%')
+      .attr('stop-color', function(d, i) {
+        return gradients[i].start;
+      });
+
+    gradient.append('stop')
+      .attr('offset', '100%')
+      .attr('stop-color', function(d, i) {
+        return gradients[i].end;
+      });
+
+    var slices = d3.selectAll(chartId + ' g.slice')
+      .append('path')
+      .attr('fill', function(d, i) {
+        return 'url(#' + d.data.color + ')';
+      })
+      .attr('d', arc)
+      .on('mouseover', function(d, i) {
+        var gradient = gradients.filter(function(obj) {
+          return obj.id == d.data.color;
+        });
+        $(chartId + ' [data-slice]').css('opacity', 0.5);
+        $(chartId + ' [data-slice=' + i + ']').css({
+          'background': gradient[0].end,
+          'opacity': 1
+        });
+      })
+      .on('mouseout', function(d, i) {
+        $(chartId + ' [data-slice]').css('opacity', 1);
+        $(chartId + ' [data-slice=' + i + ']').css('background', 'rgba(0,0,0,0.2)');
+      });
+
+    var legend = d3.select(chartId)
+      .attr('class', 'pie-chart')
+      .append('ul')
+      .attr('class', 'legend')
+      .selectAll('li').data(pie(piedata))
+      .enter().append('li')
+      .attr('data-slice', function(d, i) {
+        return i;
+      })
+      .attr('style', function(d, i) {
+        var gradient = gradients.filter(function(obj) {
+          return obj.id == d.data.color;
+        });
+        return 'border-bottom: solid 3px ' + gradient[0].end;
+      })
+      .text(function(d, i) {
+        return d.data.label + ': ';
+      });
+
+    legend.append('span')
+      .text(function(d, i) {
+        return d.data.value + '%';
+      });
+
+    var maxCirc = d3.select(chartId)
+      .append('div')
+      .attr('class', 'max-circ');
+
+    maxCirc.append('span')
+      .attr('class', 'label')
+      .text(chartLabel);
+
+    maxCirc.append('span')
+      .attr('class', 'value')
+      .attr('style', function() {
+        var top = piedata.filter(function(obj) {
+          return obj.value == max;
+        });
+        var gradient = gradients.filter(function(obj) {
+          return obj.id == top[0].color;
+        });
+        return 'color: ' + gradient[0].end;
+      })
+      .text(function() {
+        var top = piedata.filter(function(obj) {
+          return obj.value == max;
+        });
+        return top[0].label + ': ' + top[0].value + '%';
+      });
+  });
+});
+</script>
+</html>

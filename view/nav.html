@@ -1,0 +1,30 @@
+<script>	
+	function jump(id){
+		//每次点击之前，初始化所有的className
+		for (var i = 1; i <= 5; i++) {
+			document.getElementById('nav_'+i).className = '';
+		}
+		
+		var str = "nav_" + id;
+		document.getElementById(str).className = "active";
+		document.getElementsByClassName('cat_id')[id-1].href = "?cat_id="+id;
+		
+	}
+</script>
+		<ul class="nav nav-pills nav-justified">
+			<li id="nav_1">
+				<a class="cat_id animated shake" onclick="jump(1);"><span class="glyphicon glyphicon-leaf"></span>&nbsp;UI</a>
+			</li>
+			<li id="nav_2">
+				<a class="cat_id animated shake" onclick="jump(2);"><span class="glyphicon glyphicon-send"></span>&nbsp;导航</a>
+			</li>
+			<li id="nav_3">
+				<a class="cat_id animated shake" onclick="jump(3);"><span class="glyphicon glyphicon-film"></span>&nbsp;媒体</a>
+			</li>
+			<li id="nav_4">
+				<a class="cat_id animated shake" onclick="jump(4);"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;输入</a>
+			</li>
+			<li id="nav_5">
+				<a class="cat_id animated shake" onclick="jump(5);"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;其他</a>
+			</li>
+		</ul>

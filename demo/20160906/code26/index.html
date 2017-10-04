@@ -1,0 +1,638 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        body {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  -webkit-touch-callout: none !important;
+}
+
+canvas {
+  background-color: #dae8f2;
+  padding: 0;
+  -webkit-user-select: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+p {
+  text-align: center;
+}
+
+.animated-background {
+  background: #092756;
+  background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104, 128, 138, 0.4) 10%, rgba(138, 114, 76, 0) 40%), -moz-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104, 128, 138, 0.4) 10%, rgba(138, 114, 76, 0) 40%), -webkit-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104, 128, 138, 0.4) 10%, rgba(138, 114, 76, 0) 40%), -o-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -o-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104, 128, 138, 0.4) 10%, rgba(138, 114, 76, 0) 40%), -ms-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104, 128, 138, 0.4) 10%, rgba(138, 114, 76, 0) 40%), linear-gradient(to bottom, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4) 100%), linear-gradient(135deg, #670d10 0%, #092756 100%);
+  background-size: 100% 200%;
+}
+
+@-webkit-keyframes background-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+@-moz-keyframes background-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+@keyframes background-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+    </style>
+    	
+</head>
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-2 col-md-7">
+      <canvas class="animated-background" height="352" id="js-world" width="512" unselectable="on"></canvas>
+      <p>click to move</p>
+    </div>
+    <div class="col-md-3">
+      <canvas class="animated-background" id="js-minimap" unselectable="on"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/lib/alea.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
+<script src="https://codepen.io/clindsey/pen/wWxZLP.js"></script>
+<!-- geo-gene-minimap-mk1 -->
+<script src="https://codepen.io/clindsey/pen/VjBqZj.js"></script>
+<!-- geo-gen-fsm-mk2 -->
+<script src="https://codepen.io/clindsey/pen/xOJNPX.js"></script>
+<!-- geo-gen-pattern-mk1 -->
+<script src="https://codepen.io/clindsey/pen/BzPZwZ.js"></script>
+<!-- geo-gen-tilemap-mk3 -->
+<script src="https://codepen.io/clindsey/pen/ZOjNaB.js"></script>
+<!-- geo-gen-spritesheet-mk3 -->
+<script src="https://codepen.io/clindsey/pen/LkJRYY.js"></script>
+<!-- geo-gen-entity-manager-mk3 -->
+<script src="https://codepen.io/clindsey/pen/kXjZNr.js"></script>
+<!-- geo-gen-viewport-mk4 -->
+<script src="https://codepen.io/clindsey/pen/EyZXRd.js"></script>
+<!-- geo-gen-flow-field-mk3 -->
+<script src="https://codepen.io/clindsey/pen/oLrRwE.js"></script>
+<!-- pixel-people-spritesheets-mk1 -->
+</body>
+<script>
+        'use strict';
+
+var _class3, _temp;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var viewportWidth = 32;
+var viewportHeight = 22;
+var seed = +new Date();
+var tileSize = 16;
+var spritesheetSrc = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/292951/spritesheet-' + tileSize + '.png';
+var scrollSpeed = 5;
+var humanSpeed = 0.5;
+var vX = 0;
+var vY = 0;
+var grassCutoff = 6;
+var waterCutoff = 0;
+var minimapTileSize = 3;
+var animationFrameId = undefined;
+
+var random = function () {
+  var s = seed;
+  return function () {
+    return alea(s++)();
+  };
+}();
+
+var tileColors = ['#c2b26f', // sandy shore
+'#c2b26f', // sandy shore
+'#009e00', // light grass
+'#080', // dark grass
+'#080' // dark grass
+];
+
+var worldOptions = {
+  chunkTileHeight: tileColors.length * 2,
+  chunkTileWidth: tileColors.length * 2,
+  maxHeight: tileColors.length * 2,
+  worldChunkHeight: 6,
+  worldChunkWidth: 6
+};
+
+setTimeout(function () {
+  drawLoadingText();
+  loadSpritesheet(spritesheetSrc, function (imgEl) {
+    loadSpritesheet('https://s3-us-west-2.amazonaws.com/s.cdpn.io/292951/pixel-people-' + tileSize + '.png', function (pixelPeopleEl) {
+      onSpritesheetLoad(imgEl, pixelPeopleEl);
+    });
+  });
+}, 0);
+
+function onSpritesheetLoad(imgEl, pixelPeopleEl) {
+  var worldGenerator = new GeoGenPattern(sampleFn, seed, worldOptions);
+  var tilemap = new GeoGenTilemap(tileSize, tileColors);
+  var tileFinder = tilemap.tilePositionFinder(worldGenerator.tileCache);
+  var worldTileWidth = worldOptions.worldChunkWidth * worldOptions.chunkTileWidth;
+  var worldTileHeight = worldOptions.worldChunkHeight * worldOptions.chunkTileHeight;
+  var spritesheet = new GeoGenSpritesheet(imgEl, tileSize, 15);
+  var pixelPersonSpritesheets = generatePixelPersonSpritesheets(tileSize, pixelPeopleEl);
+  var worldCanvasEl = document.getElementById('js-world');
+  var width = worldCanvasEl.width;
+  var height = worldCanvasEl.height;
+
+  worldCanvasEl.addEventListener('mousedown', onMouseDown(width, height));
+  worldCanvasEl.addEventListener('touchstart', onTouchStart(width, height));
+  worldCanvasEl.addEventListener('mouseup', stopScrolling);
+  worldCanvasEl.addEventListener('touchend', stopScrolling);
+  var canvasCtx = worldCanvasEl.getContext('2d');
+  var updateTileCallback = updateTile(worldGenerator, spritesheet, tilemap, tileFinder, worldTileWidth, worldTileHeight);
+
+  var _findStartPosition = findStartPosition(worldGenerator.tileCache, worldTileWidth, worldTileHeight);
+
+  var worldX = _findStartPosition[0];
+  var worldY = _findStartPosition[1];
+
+  var viewport = new GeoGenViewport(tileSize, viewportWidth, viewportHeight, width, height, worldX, worldY, updateTileCallback, worldTileWidth, worldTileHeight);
+  var entityManager = new GeoGenEntityManager(viewport, width, height);
+  populatePlants(worldGenerator.tileCache, entityManager, spritesheet, tileSize, worldTileWidth);
+  var humans = populateHumans(worldGenerator.tileCache, entityManager, pixelPersonSpritesheets, tileSize, worldTileWidth, worldTileHeight);
+  var zombies = populateZombies(worldGenerator.tileCache, entityManager, spritesheet, tileSize, worldTileWidth, worldTileHeight);
+  viewport.setPosition(zombies[0].worldX, zombies[0].worldY);
+  var renderMinimap = geoGenMinimap(worldGenerator.tileCache, viewport, entityManager, worldTileWidth, worldTileHeight, minimapTileSize, worldOptions.maxHeight);
+  var humanFlowField = new GeoGenFlowField();
+  var zombieFlowField = new GeoGenFlowField();
+  animate(worldGenerator.tileCache, viewport, entityManager, canvasCtx, width, height, renderMinimap, humans, zombies, humanFlowField, zombieFlowField);
+}
+
+function drawLoadingText() {
+  var textValue = 'Reticulating Splines, Please Wait...';
+  var worldCanvasEl = document.getElementById('js-world');
+  var width = worldCanvasEl.width;
+  var height = worldCanvasEl.height;
+
+  var canvasCtx = worldCanvasEl.getContext('2d');
+  var halfWidth = width / 2;
+  var halfHeight = height / 2;
+  canvasCtx.textBaseline = 'middle';
+  canvasCtx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+  canvasCtx.shadowOffsetX = 1;
+  canvasCtx.shadowOffsetY = 1;
+  canvasCtx.shadowBlur = 0;
+  canvasCtx.font = '24px Helvetica, arial, sans-serif';
+  canvasCtx.fillStyle = '#fff';
+  var rect = canvasCtx.measureText(textValue);
+  var xPos = halfWidth - rect.width / 2;
+  var yPos = halfHeight;
+  canvasCtx.fillText(textValue, xPos, yPos);
+  canvasCtx.shadowOffsetX = 0;
+  canvasCtx.shadowOffsetY = 0;
+}
+
+function populateZombies(tileCache, entityManager, spritesheet, tileSize, worldTileWidth, worldTileHeight) {
+  var zombies = [];
+  var speedVariance = humanSpeed * 0.25;
+  tileCache.forEach(function (tileRow, yIndex) {
+    tileRow.forEach(function (heightValue, xIndex) {
+      var tile = tileCache[yIndex][xIndex];
+      if (heightValue > grassCutoff) {
+        var index = yIndex * worldTileWidth + xIndex;
+        if (random() < 0.0125) {
+          var speed = humanSpeed + random() * speedVariance;
+          var zombie = new Zombie(spritesheet, tileSize, xIndex, yIndex, worldTileWidth, worldTileHeight, tileCache, speed);
+          entityManager.addChild(zombie);
+          zombies.push(zombie);
+        }
+      }
+    });
+  });
+  return zombies;
+}
+
+function populateHumans(tileCache, entityManager, spritesheets, tileSize, worldTileWidth, worldTileHeight) {
+  var speedVariance = humanSpeed * 0.25;
+  var humans = [];
+  tileCache.forEach(function (tileRow, yIndex) {
+    tileRow.forEach(function (heightValue, xIndex) {
+      var tile = tileCache[yIndex][xIndex];
+      if (heightValue > grassCutoff) {
+        var index = yIndex * worldTileWidth + xIndex;
+        if (random() < 0.15) {
+          var speed = humanSpeed + (random() * speedVariance - speedVariance / 2);
+          var spritesheet = spritesheets[Math.floor(spritesheets.length * random())];
+          var human = new Human(spritesheet, tileSize, xIndex, yIndex, worldTileWidth, worldTileHeight, tileCache, speed);
+          entityManager.addChild(human);
+          humans.push(human);
+        }
+      }
+    });
+  });
+  return humans;
+}
+
+function populatePlants(tileCache, entityManager, spritesheet, tileSize, worldTileWidth) {
+  tileCache.forEach(function (tileRow, yIndex) {
+    tileRow.forEach(function (heightValue, xIndex) {
+      var tile = tileCache[yIndex][xIndex];
+      if (heightValue > grassCutoff) {
+        var index = yIndex * worldTileWidth + xIndex;
+        var randValue = random();
+        if (randValue < 0.025) {
+          var shrub = new Plant(spritesheet, tileSize, 'shrub', xIndex, yIndex);
+          entityManager.addChild(shrub);
+        } else if (randValue < 0.125) {
+          var grass = new Plant(spritesheet, tileSize, 'grass', xIndex, yIndex);
+          entityManager.addChild(grass);
+        }
+      }
+    });
+  });
+}
+
+function findStartPosition(tileCache, worldTileWidth, worldTileHeight) {
+  var giveUpCounter = worldTileWidth * worldTileHeight;
+  while (giveUpCounter--) {
+    var worldX = Math.floor(random() * worldTileWidth);
+    var worldY = Math.floor(random() * worldTileHeight);
+    if (tileCache[worldY][worldX] > grassCutoff) {
+      return [worldX, worldY];
+    }
+  }
+  return [0, 0];
+}
+
+function stopScrolling() {
+  vX = 0;
+  vY = 0;
+}
+
+function onTouchStart(width, height) {
+  return function (event) {
+    var touch = event.touches[0];
+    var rect = this.getBoundingClientRect();
+    handleScrolling(touch, rect, width, height);
+  };
+}
+
+function onMouseDown(width, height) {
+  return function (event) {
+    var rect = this.getBoundingClientRect();
+    handleScrolling(event, rect, width, height);
+  };
+}
+
+function handleScrolling(_ref, rect, width, height) {
+  var clientX = _ref.clientX;
+  var clientY = _ref.clientY;
+
+  var halfWidth = width / 2;
+  var halfHeight = height / 2;
+  var directions = [[1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1]];
+  var x = clientX - rect.left;
+  var y = clientY - rect.top;
+  var atan = Math.atan2(y - halfHeight, halfWidth - x) + Math.PI / 8;
+  atan = (atan + Math.PI * 2) % (Math.PI * 2);
+  var direction = Math.floor(atan / (Math.PI / 4));
+  var _directions$direction = directions[direction];
+  vX = _directions$direction[0];
+  vY = _directions$direction[1];
+}
+
+function sampleFn(index, x, y) {
+  return alea(index)();
+}
+
+function loadSpritesheet(src, callback) {
+  var imgEl = document.createElement('img');
+  imgEl.onload = function () {
+    callback(imgEl);
+  };
+  imgEl.src = src;
+}
+
+function updateTile(worldGenerator, spritesheet, tilemap, tileFinder, worldTileWidth, worldTileHeight) {
+  return function (tileCtx, worldX, worldY, targetSize) {
+    var wX = (worldX + worldTileWidth) % worldTileWidth;
+    var wY = (worldY + worldTileHeight) % worldTileHeight;
+    var index = wY * worldTileWidth + wX;
+    var heightValue = worldGenerator.tileCache[wY][wX];
+
+    var _tileFinder = tileFinder(wX, wY);
+
+    var col = _tileFinder[0];
+    var row = _tileFinder[1];
+
+    tileCtx.drawImage(tilemap.tileLibrary[row][col], 0, 0, tileSize, tileSize, 0, 0, targetSize, targetSize);
+  };
+}
+
+var doPathfinding = function () {
+  var lastUpdate = 0;
+  var cachedResults = undefined;
+  var timing = 1000 / 6;
+
+  return function (humanPositions, zombiePositions, humanFlowField, zombieFlowField, tileCache) {
+    var currentTime = +new Date();
+    if (currentTime - lastUpdate < timing && cachedResults) {
+      return cachedResults;
+    } else {
+      var humanNav = undefined;
+      var zombieNav = undefined;
+      humanFlowField.start(humanPositions, tileCache, waterCutoff, function () {
+        humanNav = humanFlowField.data;
+      });
+      zombieFlowField.start(zombiePositions, tileCache, waterCutoff, function () {
+        zombieNav = zombieFlowField.data;
+      });
+      cachedResults = [humanNav, zombieNav];
+      lastUpdate = currentTime;
+      return cachedResults;
+    }
+  };
+}();
+
+function animate(tileCache, viewport, entityManager, canvasCtx, width, height, renderMinimap, humans, zombies, humanFlowField, zombieFlowField) {
+  var humanPositions = humans.map(function (_ref2) {
+    var worldX = _ref2.worldX;
+    var worldY = _ref2.worldY;
+    return [worldX, worldY];
+  });
+  var zombiePositions = zombies.map(function (_ref3) {
+    var worldX = _ref3.worldX;
+    var worldY = _ref3.worldY;
+    return [worldX, worldY];
+  });
+
+  var _doPathfinding = doPathfinding(humanPositions, zombiePositions, humanFlowField, zombieFlowField, tileCache);
+
+  var humanNav = _doPathfinding[0];
+  var zombieNav = _doPathfinding[1];
+
+  zombies.forEach(function (_ref4) {
+    var worldX = _ref4.worldX;
+    var worldY = _ref4.worldY;
+    var _zombieNav$worldY$wor = zombieNav[worldY][worldX];
+    var vX = _zombieNav$worldY$wor[0];
+    var vY = _zombieNav$worldY$wor[1];
+
+    if (vX || vY) {
+      return;
+    }
+    var survivors = [];
+    humans.forEach(function (human) {
+      if (human.worldX === worldX && human.worldY === worldY) {
+        entityManager.removeChild(human);
+      } else {
+        survivors.push(human);
+      }
+    });
+    humans = survivors;
+  });
+  var centerX = width / 2;
+  var centerY = height / 2;
+  var atan = Math.atan2(vY, vX);
+  atan = (atan + Math.PI * 2) % (Math.PI * 2);
+  var dX = Math.cos(atan);
+  var dY = Math.sin(atan);
+  if (vX || vY) {
+    viewport.moveBy(dX * scrollSpeed, dY * scrollSpeed);
+  }
+  canvasCtx.clearRect(0, 0, width, height);
+  viewport.render(canvasCtx, centerX, centerY);
+  entityManager.render(canvasCtx, centerX, centerY, humanNav, zombieNav);
+  renderMinimap();
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
+  animationFrameId = requestAnimationFrame(function () {
+    animate(tileCache, viewport, entityManager, canvasCtx, width, height, renderMinimap, humans, zombies, humanFlowField, zombieFlowField);
+  });
+}
+
+function shuffle(a, seed) {
+  // http://stackoverflow.com/a/6274381
+  var j = undefined,
+      x = undefined,
+      i = undefined;
+  for (i = a.length; i; i--) {
+    j = Math.floor(random() * i);
+    x = a[i - 1];
+    a[i - 1] = a[j];
+    a[j] = x;
+  }
+}
+
+var Plant = function (_GeoGenEntity) {
+  _inherits(Plant, _GeoGenEntity);
+
+  function Plant(spritesheet, size, animation, worldX, worldY) {
+    _classCallCheck(this, Plant);
+
+    var _this = _possibleConstructorReturn(this, _GeoGenEntity.call(this, spritesheet, size, worldX, worldY));
+
+    _this.animations = {
+      shrub: {
+        speed: 0,
+        frames: [16]
+      },
+
+      grass: {
+        speed: 0,
+        frames: [17]
+      }
+    };
+
+    _this.ignoreDepth = true;
+    _this.setAnimation(animation);
+    return _this;
+  }
+
+  return Plant;
+}(GeoGenEntity);
+
+var Critter = function (_GeoGenTravelingEntit) {
+  _inherits(Critter, _GeoGenTravelingEntit);
+
+  function Critter(spritesheet, size, worldX, worldY, worldTileWidth, worldTileHeight, tileCache, speed, type) {
+    _classCallCheck(this, Critter);
+
+    var _this2 = _possibleConstructorReturn(this, _GeoGenTravelingEntit.call(this, spritesheet, size, worldX, worldY, worldTileWidth, worldTileHeight));
+
+    var directions = [{ vector: [-1, 0], name: 'west' }, { vector: [1, 0], name: 'east' }, { vector: [0, 1], name: 'south' }, { vector: [0, -1], name: 'north' }];
+    shuffle(directions);
+
+    var _directions$pop = directions.pop();
+
+    var vector = _directions$pop.vector;
+    var name = _directions$pop.name;
+
+    _this2.animationName = name;
+    _this2.tileCache = tileCache;
+    _this2.vX = vector[0];
+    _this2.vY = vector[1];
+    _this2.speed = speed;
+    _this2.type = type;
+    return _this2;
+  }
+
+  Critter.prototype.update = function update(humanNav, zombieNav) {
+    var typeNav = this.type === 'human' ? zombieNav : humanNav;
+    var _typeNav$worldY$world = typeNav[this.worldY][this.worldX];
+    var vector = _typeNav$worldY$world.vector;
+    var index = _typeNav$worldY$world.index;
+    var vX = vector[0];
+    var vY = vector[1];
+
+    if (this.type === 'human' && index > 14) {
+      vX = 0;
+      vY = 0;
+    }
+    if (this.type === 'human') {
+      vX *= -1;
+      vY *= -1;
+    }
+    this.moveBy(-vX * this.speed, -vY * this.speed);
+    var animationName = 'south';
+    if (vX > 0) {
+      animationName = 'west';
+    }
+    if (vX < 0) {
+      animationName = 'east';
+    }
+    if (vY > 0) {
+      animationName = 'north';
+    }
+    if (vY < 0) {
+      animationName = 'south';
+    }
+    if (!vX && !vY) {
+      animationName = 'southIdle';
+    }
+    this.setAnimation(animationName);
+  };
+
+  return Critter;
+}(GeoGenTravelingEntity);
+
+var Human = function (_Critter) {
+  _inherits(Human, _Critter);
+
+  function Human(spritesheet, size, worldX, worldY, worldTileWidth, worldTileHeight, tileCache, speed) {
+    _classCallCheck(this, Human);
+
+    var _this3 = _possibleConstructorReturn(this, _Critter.call(this, spritesheet, size, worldX, worldY, worldTileWidth, worldTileHeight, tileCache, speed, 'human'));
+
+    _this3.minimapColor = '#65f0ed';
+
+    _this3.animations = PixelPerson.ANIMATIONS;
+    _this3.setAnimation(_this3.animationName);
+    return _this3;
+  }
+
+  return Human;
+}(Critter);
+
+var Zombie = (_temp = _class3 = function (_Critter2) {
+  _inherits(Zombie, _Critter2);
+
+  // '#62f879';
+
+  function Zombie(spritesheet, size, worldX, worldY, worldTileWidth, worldTileHeight, tileCache, speed) {
+    _classCallCheck(this, Zombie);
+
+    var _this4 = _possibleConstructorReturn(this, _Critter2.call(this, spritesheet, size, worldX, worldY, worldTileWidth, worldTileHeight, tileCache, speed, 'zombie'));
+
+    _this4.animations = {
+      east: {
+        speed: 0.125,
+        frames: [46, 47, 48, 49]
+      },
+      north: {
+        speed: 0.125,
+        frames: [61, 62, 63, 64]
+      },
+      west: {
+        speed: 0.125,
+        frames: [76, 77, 78, 79]
+      },
+      south: {
+        speed: 0.125,
+        frames: [91, 92, 93, 94]
+      },
+      southIdle: {
+        speed: 0,
+        frames: [92]
+      }
+    };
+    _this4.minimapColor = '#fd5e2d';
+
+    _this4.setAnimationsForType('blue');
+    _this4.setAnimation(_this4.animationName);
+    return _this4;
+  }
+
+  Zombie.prototype.setAnimationsForType = function setAnimationsForType(type) {
+    var _this5 = this;
+
+    var index = Zombie.animationOffsets.indexOf(type);
+    // this.minimapColor = ['#00f', '#fd5e2d', '#62f879'][index];
+    if (!index) {
+      return;
+    }
+    var offset = index * 4;
+    Object.keys(this.animations).forEach(function (animationId) {
+      var animation = _this5.animations[animationId];
+      animation.frames = animation.frames.map(function (frameId) {
+        return frameId + offset;
+      });
+    });
+  };
+
+  return Zombie;
+}(Critter), _class3.animationOffsets = ['blue', 'orange', 'green'], _temp);
+</script>
+</html>

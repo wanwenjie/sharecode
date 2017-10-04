@@ -1,0 +1,139 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        body {
+  background: -webkit-linear-gradient(bottom, #6155ef, #35a2f6);
+  background: linear-gradient(to top, #6155ef, #35a2f6);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  cursor: pointer;
+}
+
+.wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  position: relative;
+}
+
+.outline {
+  font-family: "Work Sans";
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.4, 0, 0, 1);
+  transition: -webkit-transform 0.25s cubic-bezier(0.4, 0, 0, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0, 1), -webkit-transform 0.25s cubic-bezier(0.4, 0, 0, 1);
+  color: white;
+  font-size: 18em;
+  mix-blend-mode: screen;
+  line-height: 1;
+  text-shadow: 2px -2px white, -2px -2px white, -2px -2px white, -2px 2px white, 2px -1px white, -2px -1px white, -1px -2px white, -1px 2px white, 2px 0px white, -2px 0px white, 0px -2px white, 0px 2px white, 2px 1px white, -2px 1px white, 1px -2px white, 1px 2px white, 2px 2px white, -2px 2px white, 2px -2px white, 2px 2px white;
+}
+body:active .outline {
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+@-webkit-keyframes slide {
+  0% {
+    -webkit-transform: translate(10%);
+            transform: translate(10%);
+  }
+  100% {
+    -webkit-transform: translate(-10%);
+            transform: translate(-10%);
+  }
+}
+
+@keyframes slide {
+  0% {
+    -webkit-transform: translate(10%);
+            transform: translate(10%);
+  }
+  100% {
+    -webkit-transform: translate(-10%);
+            transform: translate(-10%);
+  }
+}
+.forward {
+  color: black;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.bg:before, .bg:after {
+  height: 100%;
+  width: 100%;
+  content: "";
+  display: block;
+  position: absolute;
+}
+.bg:before {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/bg.svg");
+  background-size: 200px;
+  opacity: .1;
+}
+.bg:after {
+  background-image: -webkit-linear-gradient(left bottom, #2a252f 50%, transparent 50%);
+  background-image: linear-gradient(to right top, #2a252f 50%, transparent 50%);
+}
+
+    </style>
+    	
+</head>
+<body>
+    <div class="bg"></div>
+<div class="wrap">
+  <div class="outline back">Ghosty</div>
+  <div class="outline forward">Ghosty</div>
+</div>
+
+</body>
+<script>
+        if (!!window.location.pathname.match(/fullcpgrid/)) {
+  var ol = document.querySelectorAll(".outline");
+  for (var i = 0; i < ol.length; i++) {
+    ol[i].setAttribute("style", "font-size: 10em");
+  }
+}
+</script>
+</html>

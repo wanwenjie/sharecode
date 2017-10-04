@@ -1,0 +1,8 @@
+1:将ideal.sql导入数据库中
+2:修改include/config.inc.php里 数据库用户名和密码
+3:测试登录用户1654206898@qq.com------123456   后台密码admin---123456
+4:修改PHP.ini扩展  php_zip.dll php_gd2.dll php_mbstring.dll 
+5:访问前台:http://localhost/XXXXX/view/
+6:访问后台:http://localhost/xxxxx/admin/
+7:我们的网址:http://sn.sv77.net/view/
+	后台:http://sn.sv77.net/admin

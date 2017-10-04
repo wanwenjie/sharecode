@@ -1,0 +1,256 @@
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        @charset "UTF-8";
+html {
+  min-width: 10em;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  perspective: 32em;
+  background: #202020;
+  color: #ddd;
+  font: 4vmin/2 trebuchet ms, verdana,  sans-serif;
+  text-align: center;
+}
+
+.drag {
+  user-select: none;
+}
+
+polygon {
+  fill: currentColor;
+  fill-opacity: .65;
+  stroke: #ee8c25;
+  stroke-width: .5em;
+  vector-effect: non-scaling-stroke;
+}
+
+[type='checkbox'] {
+  position: absolute;
+  left: -100vw;
+}
+[type='checkbox'] + label {
+  position: absolute;
+  left: 0;
+  padding: 0 .5em .125em;
+  box-shadow: 0 0 2px #000;
+  background: #222;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+[type='checkbox'] + label:before {
+  display: inline-block;
+  margin-right: .5em;
+  border: solid 2px currentColor;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  vertical-align: middle;
+  content: '';
+}
+[type='checkbox']:checked + label {
+  color: #ee8c25;
+}
+[type='checkbox']:checked + label:before {
+  content: '?';
+}
+
+div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+}
+
+.rot {
+  transform: rotate3d(10, 6, 7, 90deg);
+}
+
+.s4hedron {
+  animation: r 21s linear infinite;
+  animation-play-state: paused;
+}
+[type='checkbox']:checked ~ .rot .s4hedron {
+  animation-play-state: running;
+}
+.s4hedron svg {
+  position: absolute;
+  margin: -7em;
+  width: 14em;
+  height: 14em;
+}
+.s4hedron svg:nth-child(1) {
+  transform: rotateY(-90deg) rotateX(-35.26439deg) translateZ(2.47487em);
+}
+.s4hedron svg:nth-child(2) {
+  transform: rotateY(90deg) rotateX(-35.26439deg) translateZ(2.47487em);
+}
+.s4hedron svg:nth-child(3) {
+  transform: rotate(0.5turn) rotateY(0deg) rotateX(-35.26439deg) translateZ(2.47487em);
+}
+.s4hedron svg:nth-child(4) {
+  transform: rotate(0.5turn) rotateY(180deg) rotateX(-35.26439deg) translateZ(2.47487em);
+}
+
+@keyframes r {
+  33.33333% {
+    transform: rotateX(1turn) rotateY(0deg) rotateZ(0deg);
+  }
+  66.66667% {
+    transform: rotateX(1turn) rotateY(1turn) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(1turn) rotateY(1turn) rotateZ(1turn);
+  }
+}
+.inf {
+  margin-top: 7em;
+  opacity: .999;
+}
+.inf--faded {
+  opacity: .001;
+}
+.inf__floaty {
+  margin: 0.5em -3.25em;
+  width: 6.5em;
+  border-radius: 3px;
+  background: #d14730;
+  transition: opacity 1s ease-out;
+  font-size: 1.5rem;
+  animation: float 2s ease-in-out infinite  alternate;
+}
+.inf__floaty:before {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  border: 0.325em solid transparent;
+  border-bottom-color: #d14730;
+  transform: translate(-50%, 1px);
+  content: '';
+}
+
+@keyframes float {
+  to {
+    transform: translateY(1em);
+  }
+}
+
+    </style>
+    	
+</head>
+<body>
+    
+<svg width="0" height="0">
+  <clipPath id="cp3gon">
+    <polygon id="p3gon" points="6.123031769111886e-14,-1000 866.0254037844387,499.99999999999983 -866.0254037844385,500.00000000000034"></polygon>
+  </clipPath>
+  <symbol id="s3gon" viewBox="-1000 -1000 2000 2000">
+    <use xlink:href="#p3gon" clip-path="url(#cp3gon)"></use>
+  </symbol>
+</svg>
+<input type="checkbox" id="auto" checked="checked"/>
+<label for="auto">auto-rotate</label>
+<div class="rot">
+  <div class="s4hedron">
+    <svg>
+      <use xlink:href="#s3gon"></use>
+    </svg>
+    <svg>
+      <use xlink:href="#s3gon"></use>
+    </svg>
+    <svg>
+      <use xlink:href="#s3gon"></use>
+    </svg>
+    <svg>
+      <use xlink:href="#s3gon"></use>
+    </svg>
+  </div>
+</div>
+<div class="inf">
+  <div class="inf__floaty">drag me!</div>
+</div>
+</body>
+<script>
+        'use strict';
+var auto = document.getElementById('auto'), dcls = 'drag', rsel = '.rot', rot = document.querySelector(rsel), icls = 'inf', fcls = icls + '--faded', isel = '.' + icls, inf = document.querySelector(isel), s = document.createElement('style');
+var drag = undefined, x0 = undefined, y0 = undefined, startstate = undefined;
+(function init() {
+    document.body.appendChild(s);
+}());
+rot.addEventListener('mousedown', function (e) {
+    drag = true;
+    x0 = e.clientX;
+    y0 = e.clientY;
+    startstate = auto.checked;
+    document.body.classList.add(dcls);
+    if (startstate)
+        auto.checked = false;
+    if (!inf.classList.contains(fcls))
+        inf.classList.add(fcls);
+}, false);
+addEventListener('mousemove', function (e) {
+    var x, y, dx, dy, d, i, j, t, a;
+    if (drag) {
+        x = e.clientX;
+        y = e.clientY;
+        dx = x - x0;
+        dy = y - y0;
+        d = Math.hypot(dx, dy);
+        if (d) {
+            i = (-dy / d).toFixed(5);
+            j = (dx / d).toFixed(5);
+            a = (0.5 * d).toFixed(5);
+            t = 'rotate3d(' + [
+                i,
+                j,
+                0,
+                a
+            ] + 'deg)' + getComputedStyle(rot).transform.replace('none', '');
+            s.textContent = rsel + '{transform:' + t + '}';
+            x0 = x;
+            y0 = y;
+        }
+    }
+}, false);
+addEventListener('mouseup', function (e) {
+    if (drag) {
+        drag = false;
+        document.body.classList.remove(dcls);
+        if (startstate)
+            auto.checked = true;
+    }
+}, false);
+addEventListener('transitionend', function (e) {
+    document.body.removeChild(e.target);
+}, false);
+</script>
+</html>

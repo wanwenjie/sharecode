@@ -1,0 +1,274 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        BODY {
+  overflow: hidden;
+  background-color: #000;
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.03) 1px, transparent 1px), -webkit-linear-gradient(top, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 1em 1em;
+  background-position: center center;
+}
+
+svg {
+  width: 120px;
+  height: 240px;
+  overflow: visible;
+}
+
+.svg--defs {
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+}
+
+.container {
+  width: 480px;
+  height: 480px;
+  -webkit-animation: rotate 10s linear infinite;
+          animation: rotate 10s linear infinite;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.petals {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  padding-left: 50%;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+.petals--x {
+  -webkit-transform: rotateX(90deg);
+          transform: rotateX(90deg);
+}
+.petals--y {
+  -webkit-transform: rotateY(90deg) rotateX(180deg);
+          transform: rotateY(90deg) rotateX(180deg);
+}
+
+.petal {
+  position: absolute;
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
+  margin-left: -60px;
+}
+.petal:nth-child(1) {
+  -webkit-transform: rotateZ(72deg) rotateY(45deg);
+          transform: rotateZ(72deg) rotateY(45deg);
+}
+.petal:nth-child(2) {
+  -webkit-transform: rotateZ(144deg) rotateY(45deg);
+          transform: rotateZ(144deg) rotateY(45deg);
+}
+.petal:nth-child(3) {
+  -webkit-transform: rotateZ(216deg) rotateY(45deg);
+          transform: rotateZ(216deg) rotateY(45deg);
+}
+.petal:nth-child(4) {
+  -webkit-transform: rotateZ(288deg) rotateY(45deg);
+          transform: rotateZ(288deg) rotateY(45deg);
+}
+.petal:nth-child(5) {
+  -webkit-transform: rotateY(45deg);
+          transform: rotateY(45deg);
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+    </style>
+    	
+</head>
+<body>
+    <svg class="svg svg--defs" viewBox="0 0 300 300">
+    <radialGradient id="gradient-fy"
+        r="50%" fy="15%">
+        <stop offset="0%" 
+              stop-color="yellow" />
+        <stop offset="30%" 
+              stop-color="yellowgreen" />
+        <stop offset="60%" 
+              stop-color="teal" />
+        <stop offset="100%" 
+              stop-color="purple"/>
+      </radialGradient>
+
+    <mask id="mask">
+        <g transform="rotate(180, 150, 150)">
+            <circle cx="50%" cy="150"
+                    r="149"
+                    stroke="white" stroke-width="7"
+                    stroke-dasharray="10 20">
+            </circle>
+            <circle cx="50%" cy="145"
+                    r="140"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="140"
+                    r="130">
+            </circle>
+            <circle cx="50%" cy="135"
+                    r="120"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="130"
+                    r="110">
+            </circle>
+            <circle cx="50%" cy="125"
+                    r="100"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="120"
+                    r="90">
+            </circle>
+            <circle cx="50%" cy="115"
+                    r="80"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="110"
+                    r="70">
+            </circle>
+            <circle cx="50%" cy="105"
+                    r="60"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="100"
+                    r="50">
+            </circle>
+            <circle cx="50%" cy="95"
+                    r="40"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="90"
+                    r="30">
+            </circle>
+            <circle cx="50%" cy="85"
+                    r="20"
+                    fill="white">
+            </circle>
+            <circle cx="50%" cy="80"
+                    r="10">
+            </circle>
+        </g>    
+    </mask> 
+   
+    <symbol id="symbol" viewBox="0 0 300 600">
+        <rect width="100%" height="100%"
+              mask="url(#mask)"
+              fill="url(#gradient-fy)"
+              transform="scale(1,2)"></rect>
+    </symbol>    
+</svg>
+
+<div class="wrapper">
+    <div class="container">
+        <div class="petals petals--x">
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+        </div>
+
+        <div class="petals petals--y">
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+        </div>
+
+        <div class="petals petals--z">
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+            <svg class="petal">
+                <use xlink:href="#symbol"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+        
+</script>
+</html>

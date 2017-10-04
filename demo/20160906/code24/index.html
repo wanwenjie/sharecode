@@ -1,0 +1,312 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        *, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #323232;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.fb-cont {
+  overflow: hidden;
+  position: relative;
+  margin: 100px auto;
+  width: 800px;
+  padding: 75px;
+  padding-bottom: 140px;
+  background: #fff;
+}
+.fb-cont__inner {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.fb-cont__inner:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  height: 4px;
+  margin-top: -2px;
+  background: rgba(200, 206, 211, 0.5);
+  border-radius: 2px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.fb-cont__drag-cont {
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 574px;
+  height: 100%;
+  margin-left: -287px;
+  pointer-events: none;
+  -webkit-transform: translate3d(50%, 0, 0);
+          transform: translate3d(50%, 0, 0);
+}
+.fb-heading {
+  margin: 0 auto 60px;
+  font-size: 30px;
+  text-align: center;
+  color: #737b7b;
+}
+.fb-emote {
+  z-index: 1;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 76px;
+  height: 76px;
+  cursor: pointer;
+}
+.fb-emote svg {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%;
+  height: 100%;
+  background: #c8ced3;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+.fb-emote.s--active svg {
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
+.fb-emote__caption {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #c8ced3;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.fb-emote.s--active .fb-emote__caption {
+  color: #655e53;
+  -webkit-transform: translateY(15px);
+          transform: translateY(15px);
+}
+.fb-emote__eye {
+  stroke: none;
+  fill: #fff;
+}
+.fb-emote__smile {
+  stroke: #fff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  fill: none;
+}
+.fb-active-emote {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 110px;
+  height: 110px;
+  margin-left: -55px;
+  margin-top: -55px;
+  background: #ffd68c;
+  border-radius: 50%;
+}
+.fb-active-emote svg {
+  width: 100%;
+  height: 100%;
+}
+.fb-active-emote__eye {
+  stroke: none;
+  fill: #655e53;
+}
+.fb-active-emote__smile {
+  stroke: #655e53;
+  stroke-width: 10;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.icon-link {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  width: 32px;
+}
+.icon-link img {
+  width: 100%;
+  vertical-align: top;
+}
+.icon-link--twitter {
+  left: auto;
+  right: 5px;
+}
+
+    </style>
+    	
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+<svg class="fb-emotes-svg" style="display: none;">
+  <symbol id="fb-emote-terrible" data-emote="terrible" viewBox="0 0 100 100">
+    <path class="fb-emote__eye fb-emote__eye--left" d="M32,25 l10,10 a10,10 0 0,1 -20,0 a10,10 0 0,1 10,-10"/>
+    <path class="fb-emote__eye fb-emote__eye--right" d="M58,35 l10,-10 a10,10 0 0,1 0,20 a10,10 0 0,1 -10,-10"/>
+    <path class="fb-emote__smile" d="M30,68 q20,-13 40,0 M30,68 q20,-13 40,0"/>
+  </symbol>
+  <symbol id="fb-emote-bad" data-emote="bad" viewBox="0 0 100 100">
+    <path class="fb-emote__eye fb-emote__eye--left" d="M22,35 l10,-10 a10,10 0 0,1 0,20 a10,10 0 0,1 -10,-10"/>
+    <path class="fb-emote__eye fb-emote__eye--right" d="M68,25 l10,10 a10,10 0 0,1 -20,0 a10,10 0 0,1 10,-10"/>
+    <path class="fb-emote__smile" d="M30,68 q20,-10 40,0 M30,68 q20,-10 40,0"/>
+  </symbol>
+  <symbol id="fb-emote-okay" viewBox="0 0 100 100">
+    <path class="fb-emote__eye fb-emote__eye--left" d="M32,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+    <path class="fb-emote__eye fb-emote__eye--right" d="M68,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+    <path class="fb-emote__smile" d="M35,73 q20,-4 35,-8 M35,73 q20,-4 35,-8"/>
+  </symbol>
+  <symbol id="fb-emote-good" viewBox="0 0 100 100">
+    <path class="fb-emote__eye fb-emote__eye--left" d="M32,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+    <path class="fb-emote__eye fb-emote__eye--right" d="M68,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+    <path class="fb-emote__smile" d="M30,68 q20,10 40,0 M30,68 q20,10 40,0"/>
+  </symbol>
+  <symbol id="fb-emote-great" viewBox="0 0 100 100">
+    <path class="fb-emote__eye fb-emote__eye--left" d="M32,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+    <path class="fb-emote__eye fb-emote__eye--right" d="M68,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+    <path class="fb-emote__smile" d="M30,68 q20,15 40,0 M30,68 q20,0 40,0"/>
+  </symbol>
+</svg>
+
+<div class="fb-cont">
+  <div class="fb-heading">How was the help you received?</div>
+  <div class="fb-cont__inner">
+    <div class="fb-emote" data-emote="terrible">
+      <svg><use xlink:href="#fb-emote-terrible"/></svg>
+      <p class="fb-emote__caption">Terrible</p>
+    </div>
+    <div class="fb-emote" data-emote="bad">
+      <svg><use xlink:href="#fb-emote-bad"/></svg>
+      <p class="fb-emote__caption">Bad</p>
+    </div>
+    <div class="fb-emote s--active" data-emote="okay">
+      <svg><use xlink:href="#fb-emote-okay"/></svg>
+      <p class="fb-emote__caption">Okay</p>
+    </div>
+    <div class="fb-emote" data-emote="good">
+      <svg><use xlink:href="#fb-emote-good"/></svg>
+      <p class="fb-emote__caption">Good</p>
+    </div>
+    <div class="fb-emote" data-emote="great">
+      <svg><use xlink:href="#fb-emote-great"/></svg>
+      <p class="fb-emote__caption">Great</p>
+    </div>
+    <div class="fb-cont__drag-cont">
+      <div class="fb-active-emote">
+        <svg viewBox="0 0 100 100">
+          <path class="fb-active-emote__eye fb-active-emote__eye--left" d="M32,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+          <path class="fb-active-emote__eye fb-active-emote__eye--right" d="M68,25 a10,10 0 0,1 0,20 a10,10 0 0,1 0,-20"/>
+          <path class="fb-active-emote__smile" d="M35,73 q20,-4 35,-8 M35,73 q20,-4 35,-8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script>
+        function $$(selector, context) {
+  var context = context || document;
+  var elements = context.querySelectorAll(selector);
+  var nodesArr = [].slice.call(elements);
+  return nodesArr.length === 1 ? nodesArr[0] : nodesArr;
+};
+
+var $emotesArr = $$('.fb-emote');
+var numOfEmotes = $emotesArr.length;
+
+var $dragCont = $$('.fb-cont__drag-cont');
+var $activeEmote = $$('.fb-active-emote');
+var $leftEye = $$('.fb-active-emote__eye--left');
+var $rightEye = $$('.fb-active-emote__eye--right');
+var $smile = $$('.fb-active-emote__smile');
+
+var emoteColors = {
+  terrible: '#f8b696',
+  bad: '#f9c686',
+  default: '#ffd68c'
+}
+
+var animTime = 0.5;
+
+$emotesArr.forEach(function($emote, i) {
+  var progressStep = i / (numOfEmotes - 1);
+  $emote.dataset.progress = progressStep;
+  
+  $emote.addEventListener('click', function() {
+    var progressTo = +this.dataset.progress;
+    var type = this.dataset.emote;
+    var $target = document.querySelector('#fb-emote-' + type);
+    var $lEye = $target.querySelector('.fb-emote__eye--left');
+    var $rEye = $target.querySelector('.fb-emote__eye--right');
+    var leftEyeTargetD = $lEye.getAttribute('d');
+    var rightEyeTargetD = $rEye.getAttribute('d');
+    var smileTargetD = $target.querySelector('.fb-emote__smile').getAttribute('d');
+    var bgColor = emoteColors[type];
+    if (!bgColor) bgColor = emoteColors.default;
+    
+    $$('.fb-emote.s--active').classList.remove('s--active');
+    this.classList.add('s--active');
+    
+    TweenMax.to($activeEmote, animTime, {backgroundColor: bgColor});
+    TweenMax.to($dragCont, animTime, {x: progressTo * 100 + '%'});
+    TweenMax.to($leftEye, animTime, {morphSVG: $lEye});
+    TweenMax.to($rightEye, animTime, {morphSVG: $rEye});
+    TweenMax.to($smile, animTime, {attr: {d: smileTargetD}});
+  });
+});
+
+</script>
+</html>

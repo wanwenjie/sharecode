@@ -1,0 +1,277 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ddd;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: Exo, sans-serif;
+}
+canvas {
+  background: #fff;
+  border: 16px solid #333;
+}
+
+    </style>
+    	
+</head>
+<body>
+    <canvas width="512" height="512"></canvas>
+</body>
+<script>
+        "use strict";
+
+var canvas = document.querySelector("canvas");
+var context = canvas.getContext("2d");
+
+var RIGHT = 0;
+var DOWN = 1;
+var LEFT = 2;
+var UP = 3;
+
+var START = 0;
+var PLAYING = 1;
+var END = 2;
+
+var direction = RIGHT;
+var changeTo = RIGHT;
+var length = 4;
+var cadence = 100;
+var lastNow = null;
+var state = START;
+
+var worm = [[4, 4], [4, 3], [4, 2], [4, 1]];
+var apples = [];
+
+var tiles = [];
+for (var y = 0; y < 32; y++) {
+  for (var x = 0; x < 32; x++) {
+    tiles.push(Math.random());
+  }
+}
+
+function update(now) {
+  if (state === START || state === END) {
+    return;
+  }
+
+  if (lastNow === null) {
+    lastNow = now;
+  }
+
+  if (now - lastNow > cadence) {
+    lastNow = now;
+
+    if (direction !== changeTo) {
+      direction = changeTo;
+    }
+
+    var last = worm.pop();
+    if (length > worm.length) {
+      worm.push([last[0], last[1]]);
+    }
+
+    var first = worm[0];
+    if (direction === RIGHT) {
+      last[0] = first[0] + 1;
+      last[1] = first[1];
+    } else if (direction === DOWN) {
+      last[0] = first[0];
+      last[1] = first[1] + 1;
+    } else if (direction === LEFT) {
+      last[0] = first[0] - 1;
+      last[1] = first[1];
+    } else {
+      last[0] = first[0];
+      last[1] = first[1] - 1;
+    }
+
+    if (last[0] < 0 || last[1] < 0 || last[0] > 31 || last[1] > 31) {
+      state = END;
+      return;
+    }
+
+    for (var _iterator = worm, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
+
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
+
+      var part = _ref;
+
+      if (last[0] === part[0] && last[1] === part[1]) {
+        state = END;
+        return;
+      }
+    }
+
+    worm.unshift(last);
+
+    if (apples.length < 2) {
+      var x = Math.round(Math.random() * 31);
+      var y = Math.round(Math.random() * 31);
+      apples.push([x, y]);
+    }
+
+    for (var index = apples.length - 1; index >= 0; index--) {
+      var apple = apples[index];
+      if (apple[0] === last[0] && apple[1] === last[1]) {
+        length++;
+        apples.splice(index, 1);
+      }
+    }
+  }
+}
+
+function render(now) {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  for (var index = 0; index < tiles.length; index++) {
+    var x = index % 32;
+    var y = Math.floor(index / 32);
+    tiles[index] += 0.01;
+    var alpha = Math.sin(tiles[index] * Math.PI * 2.0);
+    context.fillStyle = "rgba(0,0,0," + (0.1 + alpha * 0.05) + ")";
+    context.fillRect(x * 16, y * 16, 16, 16);
+  }
+
+  context.fillStyle = "#333";
+  for (var _iterator2 = worm, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+    var _ref2;
+
+    if (_isArray2) {
+      if (_i2 >= _iterator2.length) break;
+      _ref2 = _iterator2[_i2++];
+    } else {
+      _i2 = _iterator2.next();
+      if (_i2.done) break;
+      _ref2 = _i2.value;
+    }
+
+    var part = _ref2;
+
+    context.fillRect(part[0] * 16, part[1] * 16, 16, 16);
+  }
+
+  context.fillStyle = "#f00";
+  for (var _iterator3 = apples, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+    var _ref3;
+
+    if (_isArray3) {
+      if (_i3 >= _iterator3.length) break;
+      _ref3 = _iterator3[_i3++];
+    } else {
+      _i3 = _iterator3.next();
+      if (_i3.done) break;
+      _ref3 = _i3.value;
+    }
+
+    var apple = _ref3;
+
+    context.fillRect(apple[0] * 16, apple[1] * 16, 16, 16);
+  }
+
+  if (state === START || state === END) {
+    context.font = "900 36px Exo";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillStyle = "#333";
+    if (state === START) {
+      context.fillText("CLICK TO PLAY", canvas.width * 0.5, canvas.height * 0.5);
+    } else if (state === END) {
+      context.fillText("GAME OVER", canvas.width * 0.5, canvas.height * 0.5);
+      context.font = "900 18px Exo";
+      context.fillText("CLICK TO PLAY", canvas.width * 0.5, canvas.height * 0.55);
+    }
+  }
+}
+
+function frame(now) {
+  update(now);
+  render(now);
+  window.requestAnimationFrame(frame);
+}
+
+function key(e) {
+  if (e.keyCode === 37) {
+    if (direction != RIGHT) {
+      changeTo = LEFT;
+    }
+  } else if (e.keyCode === 38) {
+    if (direction != DOWN) {
+      changeTo = UP;
+    }
+  } else if (e.keyCode === 39) {
+    if (direction != LEFT) {
+      changeTo = RIGHT;
+    }
+  } else if (e.keyCode === 40) {
+    if (direction != UP) {
+      changeTo = DOWN;
+    }
+  }
+}
+
+function click(e) {
+  if (state === START || state === END) {
+    state = PLAYING;
+    length = 4;
+    changeTo = direction = RIGHT;
+    while (apples.pop()) {}
+    while (worm.pop()) {}
+    worm.push([4, 4], [4, 3], [4, 2], [4, 1]);
+  }
+}
+
+frame(0);
+
+window.addEventListener("keyup", key);
+canvas.addEventListener("click", click);
+</script>
+</html>

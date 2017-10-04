@@ -1,0 +1,250 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        body {
+	background: #000;
+	overflow: hidden;	
+}
+
+canvas {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+    </style>
+    	
+</head>
+<body>
+    <canvas></canvas>
+</body>
+<script>
+        // messy, messy code! ye have been warned! just experimenting here
+
+// click anywhere to regenerate
+
+var c = document.querySelector('canvas'),
+	ctx = c.getContext('2d'),
+	w = 800,
+	h = 600,
+	standers = [],
+	walkers = [],
+	PI = Math.PI,
+	TAU = PI * 2,
+	count = 0,
+	countMax = 800,
+	iterations = 50,
+	radius = 12,
+	angleType = true,
+	startHue,
+	rangeHue,
+	stop,
+	raf;
+
+function rand(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
+function dist(p1, p2) {
+	var dx = p2.x - p1.x,
+		dy = p2.y - p1.y;
+	return Math.sqrt(dx * dx + dy * dy);
+}
+
+function Walker(x, y, r, color, standing) {
+	count++;
+	this.x = x;
+	this.y = y;
+	this.r = r;
+	this.color = color || '#fff';
+	this.standing = standing || false;
+}
+
+Walker.prototype.step = function(i) {
+	if (this.standing) {
+		return;
+	}
+	this.x += rand(-this.r * 2, this.r * 2);
+	this.y += rand(-this.r * 2, this.r * 2);
+
+	this.x = Math.min(w, Math.max(0, this.x));
+	this.y = Math.min(h, Math.max(0, this.y));
+
+	var j = standers.length;
+	while (j--) {
+		var other = standers[j],
+			compDist = this.r + other.r;
+
+		if (dist(this, other) <= compDist && !this.standing) {
+			var distOrigin = dist(this, standers[0]);
+			this.standing = true;
+			this.r = Math.max(1, radius - (distOrigin / (w / 2)) * radius * 1.1);
+			var hue = startHue + (distOrigin / w) * rangeHue;
+			this.color = 'hsla(' + hue + ', 100%, 60%, 1)';
+			var dx = other.x - this.x
+			var dy = other.y - this.y;
+			var angle = Math.atan2(dy, dx);
+			this.hitAngle = angle;
+			standers.push(this);
+			walkers.splice(i, 1);
+		}
+	}
+};
+
+Walker.prototype.draw = function(final) {
+	if (final) {
+		ctx.fillStyle = this.color;
+		ctx.save();
+		var size = this.r * 2;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(rand(0, TAU));
+		ctx.shadowBlur = this.r * 10;
+		ctx.shadowColor = this.color;
+		ctx.globalAlpha = 0.2;
+		ctx.fillRect(-size / 2, -size / 2, size, size);
+		ctx.restore();
+
+		ctx.strokeStyle = this.color;
+		ctx.lineWidth = this.r * 1;
+		ctx.beginPath();
+		ctx.moveTo(this.x, this.y);
+		var dx = this.x - w / 2;
+		var dy = this.y - h / 2;
+		var angle = Math.atan2(dy, dx);
+		if (angleType) {
+			angle = this.hitAngle;
+		}
+		var x = this.x + Math.cos(angle) * this.r * 3;
+		var y = this.y + Math.sin(angle) * this.r * 3;
+		ctx.lineTo(x, y);
+		ctx.shadowBlur = this.r * 10;
+		ctx.shadowColor = this.color;
+		ctx.globalAlpha = 0.75;
+		ctx.stroke();
+	} else {
+		ctx.rect(this.x, this.y, 2, 2);
+	}
+};
+
+function init() {
+	cancelAnimationFrame(raf);
+	angleType = !angleType;
+	startHue = rand(0, 360);
+	rangeHue = rand(90, 360);
+	stop = false;
+	count = 0;
+	c.width = w;
+	c.height = h;
+	walkers.length = 0;
+	standers.length = 0;
+	standers.push(new Walker(
+		w / 2,
+		h / 2,
+		radius,
+		'hsl(' + startHue + ', 100%, 50%)',
+		true
+	));
+	loop();
+}
+
+function step() {
+	if (!stop && count < countMax - 1) {
+		walkers.push(new Walker(
+			rand(0, 1) < 0.5 ? 0 : w,
+			rand(0, 1) < 0.5 ? 0 : h,
+			radius
+		));
+	}
+
+	var i = standers.length;
+	while (i--) {
+		standers[i].step(i);
+	}
+
+	var j = walkers.length;
+	while (j--) {
+		walkers[j].step(j);
+	}
+}
+
+function draw(final) {
+	ctx.clearRect(0, 0, w, h);
+
+	if (final) {
+		ctx.globalCompositeOperation = 'lighter';
+	}
+
+	var i = standers.length;
+	while (i--) {
+		if (final) {
+			standers[i].draw(final);
+		} else {
+			ctx.beginPath();
+			standers[i].draw();
+			ctx.fillStyle = '#fff';
+			ctx.fill();
+		}
+	}
+
+	var j = walkers.length;
+	while (j--) {
+		if (final) {
+			walkers[j].draw();
+		} else {
+			ctx.beginPath();
+			walkers[j].draw();
+			ctx.fillStyle = '#fff';
+			ctx.fill();
+		}
+	}
+}
+
+function loop() {
+	if (!stop) {
+		raf = requestAnimationFrame(loop);
+	}
+	draw()
+	for (var i = 0; i < iterations; i++) {
+		step();
+		if (standers.length > countMax - 2) {
+			stop = true;
+			cancelAnimationFrame(raf);
+			draw(true);
+			break;
+		}
+	}
+}
+
+init();
+
+addEventListener('click', init);
+</script>
+</html>

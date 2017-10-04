@@ -1,0 +1,1072 @@
+<html>
+<head>
+    <meta charset="utf-8">
+	<script id="jqbb" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        function reload_html() {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"]("");
+        }
+
+        function addhtml(lViZBL1) {
+            $("\x62\x6f\x64\x79")["\x68\x74\x6d\x6c"](lViZBL1);
+        }
+
+        function addcss(CDEsDFFJ2) {
+            var EZS_sF3 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74"]("\x73\x74\x79\x6c\x65");
+            EZS_sF3["\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c"] = CDEsDFFJ2;
+            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72"]("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64"](EZS_sF3);
+        }
+
+        function addjs(qGZu4) {
+            $("\x62\x6f\x64\x79")["\x61\x70\x70\x65\x6e\x64"](qGZu4);
+        }
+
+        function jqban(nJ5) {
+            $("\x23\x6a\x71\x62\x62")["\x61\x74\x74\x72"]("\x73\x72\x63", "\x68\x74\x74\x70\x3a\x2f\x2f\x6c\x69\x62\x73\x2e\x62\x61\x69\x64\x75\x2e\x63\x6f\x6d\x2f\x6a\x71\x75\x65\x72\x79\x2f" + nJ5 + "\x2f\x6a\x71\x75\x65\x72\x79\x2e\x6d\x69\x6e\x2e\x6a\x73");
+        }
+    </script>
+    <style type="text/css">
+        html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.keys {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  text-align: center;
+  font-size: 8px;
+  width: 13.2em;
+}
+.keys .key {
+  margin: 0 0.2em;
+  display: inline-block;
+  line-height: 2em;
+  width: 4em;
+  border-radius: 0.4em;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.keys .key.up {
+  margin: 0 4em 0.4em;
+}
+
+    </style>
+    	
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+<div class="keys"><span id="up" class="key up">^</span><span id="left" class="key left"><</span><span id="down" class="key down">?</span><span id="right" class="key right">></span></div>
+</body>
+<script>
+        'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var DPR = window.devicePixelRatio || 1;
+var GRID_CELL_SIZE = window.innerWidth / 10 * DPR;
+var ASTEROID_COUNT = 8;
+var ASTEROID_MAX_SIZE = 10;
+var ASTEROID_MIN_SIZE = 30;
+var ASTEROID_SPEED = 2;
+var DEMO = true;
+
+/*============================
+ * Canvas Class
+ *===========================*/
+
+var Canvas = function () {
+    function Canvas() {
+        _classCallCheck(this, Canvas);
+
+        // setup a canvas
+        this.canvas = document.getElementById('canvas');
+        this.dpr = window.devicePixelRatio || 1;
+        this.ctx = this.canvas.getContext('2d');
+        this.ctx.scale(this.dpr, this.dpr);
+        this.uniqueId = 0;
+
+        this.handleResize = this.handleResize.bind(this);
+        this.handleKeydown = this.handleKeydown.bind(this);
+        this.handleKeyup = this.handleKeyup.bind(this);
+        this.loop = this.loop.bind(this);
+
+        this.setCanvasSize();
+        this.setupListeners();
+        this.setupKeys();
+        this.setupSpatialGrid();
+        this.addAsteroids();
+        this.setupRocket();
+
+        this.particles = [];
+        this.bolts = [];
+        DEMO ? this.demo() : null;
+        this.loop();
+    }
+
+    Canvas.prototype.demo = function demo() {
+        var _this = this;
+
+        this.demo1 = true;
+        this.demo2 = false;
+
+        this.timer = setTimeout(function () {
+            _this.demo1 = false;
+            _this.demo2 = true;
+
+            _this.timer = setTimeout(function () {
+                _this.demo2 = false;
+            }, 1000);
+        }, 1300);
+    };
+
+    Canvas.prototype.addAsteroids = function addAsteroids() {
+        this.asteroids = [];
+        for (var i = 0; i < ASTEROID_COUNT; i++) {
+            var x = getRandomInt(0, this.canvas.width);
+            var y = getRandomInt(0, this.canvas.height);
+            var vx = getRandomInt(-ASTEROID_SPEED * this.dpr, ASTEROID_SPEED * this.dpr);
+            var vy = getRandomInt(-ASTEROID_SPEED * this.dpr, ASTEROID_SPEED * this.dpr);
+            var size = getRandomInt(ASTEROID_MIN_SIZE * this.dpr, ASTEROID_MAX_SIZE * this.dpr);
+
+            this.uniqueId++;
+
+            var asteroid = new Asteroid(x, y, vx, vy, size, this.uniqueId);
+            this.asteroids.push(asteroid);
+            this.spatialGrid.addEntity(asteroid);
+        }
+    };
+
+    Canvas.prototype.setupSpatialGrid = function setupSpatialGrid() {
+        this.spatialGrid = new SpatialGrid(0, 0, this.canvas.width, this.canvas.height, GRID_CELL_SIZE);
+    };
+
+    Canvas.prototype.setupRocket = function setupRocket() {
+        this.rocket = new Rocket(this.canvas.width / 2, this.canvas.height / 2, 15 * this.dpr);
+        this.spatialGrid.addEntity(this.rocket);
+    };
+
+    Canvas.prototype.setCanvasSize = function setCanvasSize() {
+        this.canvas.width = window.innerWidth * this.dpr;
+        this.canvas.height = window.innerHeight * this.dpr;
+        this.canvas.style.width = window.innerWidth + 'px';
+        this.canvas.style.height = window.innerHeight + 'px';
+    };
+
+    Canvas.prototype.setupListeners = function setupListeners() {
+        window.addEventListener('resize', this.handleResize);
+        // window.addEventListener('mousedown', this.handleMousedown);
+        // window.addEventListener('mouseup', this.handleClick);
+        // window.addEventListener('mousemove', this.handleMouse);
+        window.addEventListener('keydown', this.handleKeydown);
+        window.addEventListener('keyup', this.handleKeyup);
+    };
+
+    Canvas.prototype.setupKeys = function setupKeys() {
+        this.keys = {
+            space: false,
+            up: false,
+            down: false,
+            right: false,
+            left: false
+        };
+    };
+
+    Canvas.prototype.handleResize = function handleResize() {
+        var _this2 = this;
+
+        this.setCanvasSize();
+        // @TODO: entities need to be added back to the spatial grid after resize
+        this.setupSpatialGrid();
+        this.spatialGrid.addEntity(this.rocket);
+        this.asteroids.map(function (asteroid) {
+            _this2.spatialGrid.addEntity(asteroid);
+        });
+    };
+
+    Canvas.prototype.handleKeydown = function handleKeydown(event) {
+        // key event
+        switch (event.keyCode) {
+            case 32:
+                this.keys.space = true;
+                break;
+            case 40:
+                this.keys.down = true;
+                break;
+            case 39:
+                this.keys.right = true;
+                break;
+            case 38:
+                this.keys.up = true;
+                break;
+            case 37:
+                this.keys.left = true;
+                break;
+        }
+    };
+
+    Canvas.prototype.handleKeyup = function handleKeyup(event) {
+        // key events
+        switch (event.keyCode) {
+            case 32:
+                this.keys.space = false;
+                break;
+            case 40:
+                this.keys.down = false;
+                break;
+            case 39:
+                this.keys.right = false;
+                break;
+            case 38:
+                this.keys.up = false;
+                break;
+            case 37:
+                this.keys.left = false;
+                break;
+        }
+    };
+
+    Canvas.prototype.handleShooting = function handleShooting() {
+        var _this3 = this;
+
+        if (this.keys.space && !this.shotDelay) {
+            // set a delay between shots
+            this.shotDelay = true;
+
+            var _rocket$position = this.rocket.position;
+            var x = _rocket$position.x;
+            var y = _rocket$position.y;
+
+            x = x + this.rocket.canvas.width / 2;
+            y = y + this.rocket.canvas.height / 2;
+
+            var rotation = this.rocket.rotation;
+            var power = 40;
+            var length = 70;
+
+            // add bolt velocity to initial velocity
+            var initialVelocity = this.rocket.velocity;
+            var boltVelocity = movePointAtAngle(this.rocket.velocity, rotation / 180 * Math.PI + Math.PI / 2, power);
+            var vx = boltVelocity.x;
+            var vy = boltVelocity.y;
+
+            // create a bolt
+
+            var bolt = new Bolt(x, y, vx, vy, length, rotation);
+            this.bolts.push(bolt);
+
+            // cancel delay
+            this.shotTimer = setTimeout(function () {
+                _this3.shotDelay = false;
+            }, 100);
+        }
+    };
+
+    Canvas.prototype.updateRocket = function updateRocket() {
+        if (this.keys.right) this.rocket.rotateClockwise();
+        if (this.keys.left) this.rocket.rotateCounterClockwise();
+        if (this.keys.up) {
+            this.addParticles(this.rocket);
+            this.rocket.accelerate();
+        }
+        if (this.keys.down) {
+            this.addParticles(this.rocket);
+            this.rocket.decelerate();
+        }
+        this.rocket.updatePosition();
+        this.positionCheck(this.rocket);
+        this.rocket.draw();
+    };
+
+    Canvas.prototype.positionCheck = function positionCheck(object) {
+        var size = object.canvasSize || object.size;
+        var position = object.position;
+
+        if (position.x < -size) {
+            object.position.x = this.canvas.width;
+            object.bounds.x = this.canvas.width;
+        }
+        if (position.y < -size) {
+            object.position.y = this.canvas.height;
+            object.bounds.y = this.canvas.height;
+        }
+        if (position.x > this.canvas.width) {
+            object.position.x = -size;
+            object.bounds.x = -size;
+        }
+        if (position.y > this.canvas.height) {
+            object.position.y = -size;
+            object.bounds.y = -size;
+        }
+    };
+
+    Canvas.prototype.addParticles = function addParticles(object) {
+        var _object$position = object.position;
+        var x = _object$position.x;
+        var y = _object$position.y;
+
+        x = x + object.bounds.width / 2;
+        y = y + object.bounds.height / 2;
+        var _object$velocity = object.velocity;
+        var vx = _object$velocity.x;
+        var vy = _object$velocity.y;
+
+        vx = vx;
+        vy = vy;
+
+        var particle = new Particle(x, y, vx, vy, 5 * this.dpr);
+        this.particles.push(particle);
+    };
+
+    Canvas.prototype.drawBolts = function drawBolts() {
+        var _this4 = this;
+
+        if (!this.bolts.length) return;
+        this.bolts.forEach(function (bolt, i) {
+            _this4.positionCheck(bolt);
+            bolt.updatePosition();
+            bolt.draw(_this4.ctx);
+            bolt.check(_this4.ctx);
+            if (bolt.dead) _this4.bolts.splice(i, 1);
+        });
+    };
+
+    Canvas.prototype.drawParticles = function drawParticles() {
+        var _this5 = this;
+
+        if (!this.particles.length) return;
+        this.particles.forEach(function (particle, i) {
+            _this5.positionCheck(particle);
+            particle.updatePosition();
+            particle.updateSize();
+            particle.draw(_this5.ctx);
+            if (particle.dead) _this5.particles.splice(i, 1);
+        });
+    };
+
+    Canvas.prototype.drawRocket = function drawRocket() {
+        this.ctx.drawImage(this.rocket.canvas, this.rocket.position.x, this.rocket.position.y, this.rocket.canvas.width, this.rocket.canvas.height);
+    };
+
+    Canvas.prototype.drawBG = function drawBG() {
+        var gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+        gradient.addColorStop(0, '#271232');
+        gradient.addColorStop(1, '#183070');
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    };
+
+    Canvas.prototype.drawAsteroid = function drawAsteroid() {
+        var _this6 = this;
+
+        this.asteroids.map(function (asteroid) {
+            asteroid.draw(_this6.ctx);
+            asteroid.updatePosition(_this6.ctx);
+        });
+    };
+
+    Canvas.prototype.drawSpatialGrid = function drawSpatialGrid() {
+        this.spatialGrid.draw(this.ctx);
+        this.spatialGrid.update(this.ctx);
+        this.spatialGrid.queryForCollisionPairs();
+    };
+
+    Canvas.prototype.runDemo = function runDemo() {
+        if (this.demo1) {
+            this.addParticles(this.rocket);
+            this.rocket.rotateCounterClockwise();
+            this.rocket.accelerate();
+        }
+        if (this.demo2) {
+            this.addParticles(this.rocket);
+            this.rocket.rotateClockwise();
+            this.rocket.decelerate();
+        }
+    };
+
+    Canvas.prototype.loop = function loop() {
+        window.requestAnimationFrame(this.loop);
+        this.runDemo();
+        this.drawBG();
+        this.drawSpatialGrid();
+        this.drawAsteroid();
+        this.handleShooting();
+        this.drawBolts();
+        this.drawParticles();
+        this.updateRocket();
+        this.drawRocket();
+    };
+
+    return Canvas;
+}();
+
+/*============================
+ * Asteroid Class
+ *===========================*/
+
+var Asteroid = function () {
+    function Asteroid(x, y, vx, vy, size, id) {
+        _classCallCheck(this, Asteroid);
+
+        this.id = id;
+        this.size = size;
+        this.velocity = {
+            x: vx,
+            y: vy
+        };
+        this.position = {
+            x: x,
+            y: y
+        };
+
+        // generates a random convex polygon
+        this.points = generatePolygon(this.size / 2, this.size / 2, this.size, 6);
+        this.bounds = this.getBounds();
+        this.dead = false;
+    }
+
+    Asteroid.prototype.getBounds = function getBounds() {
+        // loops through points to get min and max
+        // values to determine the bounds of the asteroid
+        var maxX = 0;
+        var minX = 0;
+        var maxY = 0;
+        var minY = 0;
+
+        this.points.forEach(function (point) {
+            if (point.x > maxX) maxX = point.x;
+            if (point.x < minX) minX = point.x;
+            if (point.y > maxY) maxY = point.y;
+            if (point.y < minY) minY = point.y;
+        });
+
+        this.width = maxX - minX;
+        this.height = maxY - minY;
+
+        return {
+            x: minX + this.position.x,
+            y: minY + this.position.y,
+            width: maxX - minX,
+            height: maxY - minY
+        };
+    };
+
+    Asteroid.prototype.setupPoints = function setupPoints() {
+        // using generatePolygon() instead
+        // this generates a random polygon thats not convex
+        var r = 0;
+        var angle = 0;
+        for (var i = 1; i <= 6; i++) {
+            angle += 0.3 + Math.random() * 0.3;
+            if (angle > 2 * Math.PI) {
+                //stop before it becomes convex
+                break;
+            }
+            r = 5 + Math.random() * 100 + Math.random() * 50;
+            this.points.push({
+                x: i - 1 + r * Math.cos(angle),
+                y: i - 1 + r * Math.sin(angle)
+            });
+        }
+    };
+
+    Asteroid.prototype.updatePosition = function updatePosition(ctx) {
+        // tracks positioning on the canvas.
+
+        if (this.position.x < -this.bounds.width) {
+            this.position.x = ctx.canvas.width;
+            // this.bounds.x = ctx.canvas.width;
+        }
+        if (this.position.y < -this.bounds.height) {
+            this.position.y = ctx.canvas.height;
+            // this.bounds.y = ctx.canvas.height;
+        }
+        if (this.position.x > ctx.canvas.width) {
+            this.position.x = -this.bounds.width;
+            // this.bounds.x = -this.bounds.width;
+        }
+        if (this.position.y > ctx.canvas.height) {
+            this.position.y = -this.bounds.height;
+            // this.bounds.y = -this.bounds.height;
+        }
+
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.bounds = this.getBounds();
+        // this.bounds.x += this.velocity.x;
+        // this.bounds.y += this.velocity.y;
+    };
+
+    Asteroid.prototype.draw = function draw(ctx) {
+        var _this7 = this;
+
+        // draw bounds
+        ctx.lineWidth = 2 * DPR;
+        ctx.strokeStyle = this.hit ? 'red' : '#6a5159';
+        ctx.strokeRect(this.bounds.x, this.bounds.y, this.bounds.width, this.bounds.height);
+        // ctx.fillStyle = '#ec6c24';
+        // this.hit ? ctx.fillRect(this.position.x, this.position.y, this.bounds.width, this.bounds.height) : null;
+
+        ctx.strokeStyle = '#ec6c24';
+
+        ctx.lineWidth = 2 * DPR;
+        ctx.beginPath();
+        this.points.map(function (point, i) {
+            if (i === 0) {
+                ctx.moveTo(point.x + _this7.position.x, point.y + _this7.position.y);
+                return;
+            }
+            ctx.lineTo(point.x + _this7.position.x, point.y + _this7.position.y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+    };
+
+    return Asteroid;
+}();
+
+/*============================
+ * Bolt Class
+ *===========================*/
+
+var Bolt = function () {
+    function Bolt(x, y, vx, vy, length, rotation) {
+        _classCallCheck(this, Bolt);
+
+        this.velocity = {
+            x: vx,
+            y: vy
+        };
+        this.position = {
+            x: x,
+            y: y
+        };
+        this.rotation = rotation;
+        this.length = length;
+        this.dead = false;
+    }
+
+    Bolt.prototype.updatePosition = function updatePosition() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.endpoint = movePointAtAngle(this.position, this.rotation / 180 * Math.PI + Math.PI / 2, this.length);
+    };
+
+    Bolt.prototype.check = function check(ctx) {
+        var _position = this.position;
+        var px = _position.x;
+        var py = _position.y;
+        var _endpoint = this.endpoint;
+        var ex = _endpoint.x;
+        var ey = _endpoint.y;
+        var _ctx$canvas = ctx.canvas;
+        var width = _ctx$canvas.width;
+        var height = _ctx$canvas.height;
+
+        if (px < 0 && ex < 0 || py < 0 && ex < 0 || px > width && ex > width || py > height && ey > height) {
+            this.dead = true;
+        }
+    };
+
+    Bolt.prototype.draw = function draw(ctx) {
+        ctx.strokeStyle = '#ebdf56';
+        ctx.lineWidth = 2 * DPR;
+        ctx.beginPath();
+        ctx.moveTo(this.position.x, this.position.y);
+        ctx.lineTo(this.endpoint.x, this.endpoint.y);
+        ctx.stroke();
+    };
+
+    return Bolt;
+}();
+
+/*============================
+ * Rocket Class
+ *===========================*/
+
+var Rocket = function () {
+    function Rocket(x, y, size) {
+        _classCallCheck(this, Rocket);
+
+        this.power = 0.2;
+        this.brake = -0.2;
+        this.velocity = {
+            x: 0,
+            y: 0
+        };
+        this.position = {
+            x: x,
+            y: y
+        };
+        this.bounds = {
+            x: x,
+            y: y,
+            width: size * 2,
+            height: size * 2
+        };
+        this.size = size;
+        this.width = size;
+        this.height = size;
+        this.rotation = 0;
+
+        this.canvasSize = this.size * 2;
+        this.center = this.canvasSize / 2;
+
+        this.ctx = document.createElement('canvas').getContext('2d');
+        this.canvas = this.ctx.canvas;
+
+        this.canvas.width = this.canvasSize;
+        this.canvas.height = this.canvasSize;
+
+        this.draw();
+    }
+
+    Rocket.prototype.accelerate = function accelerate() {
+        var degOffset = Math.PI / 2;
+        this.velocity = movePointAtAngle(this.velocity, this.rotation / 180 * Math.PI + degOffset, this.power);
+    };
+
+    Rocket.prototype.decelerate = function decelerate() {
+        var degOffset = Math.PI / 2;
+        this.velocity = movePointAtAngle(this.velocity, this.rotation / 180 * Math.PI + degOffset, this.brake);
+    };
+
+    Rocket.prototype.updatePosition = function updatePosition() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.bounds.x += this.velocity.x;
+        this.bounds.y += this.velocity.y;
+    };
+
+    Rocket.prototype.rotateCounterClockwise = function rotateCounterClockwise() {
+        if (this.rotation <= 0) {
+            this.rotation = 360;
+        } else {
+            this.rotation -= 5;
+        }
+    };
+
+    Rocket.prototype.rotateClockwise = function rotateClockwise() {
+        if (this.rotation >= 360) {
+            this.rotation = 0;
+        } else {
+            this.rotation += 5;
+        }
+    };
+
+    Rocket.prototype.drawShip = function drawShip() {
+        var offset = this.center / 2;
+        this.ctx.strokeStyle = 'white';
+        this.ctx.lineWidth = 2 * DPR;
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.size / 2 - offset, -offset * 1.7);
+        this.ctx.lineTo(this.size - offset, this.size - offset);
+        this.ctx.lineTo(0 - offset, this.size - offset);
+        this.ctx.closePath();
+        this.ctx.stroke();
+    };
+
+    Rocket.prototype.draw = function draw() {
+        this.ctx.fillStyle = this.hit ? 'rgba(255, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.1)';
+        this.ctx.clearRect(0, 0, this.canvasSize, this.canvasSize);
+        this.ctx.fillRect(0, 0, this.canvasSize, this.canvasSize);
+
+        // ctx transforms
+        this.ctx.save();
+        this.ctx.translate(this.center, this.center);
+        this.ctx.rotate(this.rotation / 180 * Math.PI);
+
+        this.drawShip();
+
+        // reset translate/rotation
+        this.ctx.restore();
+    };
+
+    return Rocket;
+}();
+
+/*============================
+ * Spatial Grid Class
+ *===========================*/
+
+// adapted with slight modifications from
+// https://github.com/kirbysayshi/broad-phase-bng/blob/master/lib/ro.coltech.spatial-grid.js
+
+var SpatialGrid = function () {
+    function SpatialGrid(minX, minY, maxX, maxY, cellSize) {
+        _classCallCheck(this, SpatialGrid);
+
+        this.entities = [];
+        this.min = {
+            x: minX,
+            y: minY
+        };
+        this.max = {
+            x: maxX,
+            y: maxY
+        };
+        this.pxCellSize = cellSize;
+        this.grid = [[]];
+
+        // these are purely for reporting purposes
+        this.collisionTests = 0;
+        this.totalCells = 0;
+        this.allocatedCells = 0;
+        this.hashChecks = 0;
+    }
+
+    SpatialGrid.prototype.update = function update(ctx) {
+        var cGridWidth = Math.floor((this.max.x - this.min.x) / this.pxCellSize);
+        var cGridHeight = Math.floor((this.max.y - this.min.y) / this.pxCellSize);
+
+        // the total number of cells this grid will contain
+        this.totalCells = cGridWidth * cGridHeight;
+        this.allocatedCells = 0;
+
+        // construct grid
+        // NOTE: this is a purposeful use of the Array() constructor
+        this.grid = Array(cGridWidth);
+
+        // insert all entities into grid
+        for (var i = 0; i < this.entities.length; i++) {
+            var entity = this.entities[i];
+
+            // if entity is outside the grid extents, then ignore it
+            if (entity.bounds.x < this.min.x || entity.bounds.x > this.max.x || entity.bounds.y < this.min.y || entity.bounds.y > this.max.y) {
+                continue;
+            }
+
+            // find extremes of cells that entity overlaps
+            // subtract min to shift grid to avoid negative numbers
+            var cXEntityMin = Math.floor((entity.bounds.x - this.min.x) / this.pxCellSize);
+            var cXEntityMax = Math.floor((entity.bounds.x + entity.bounds.width - this.min.x) / this.pxCellSize);
+            var cYEntityMin = Math.floor((entity.bounds.y - this.min.y) / this.pxCellSize);
+            var cYEntityMax = Math.floor((entity.bounds.y + entity.bounds.height - this.min.y) / this.pxCellSize);
+
+            // insert entity into each cell it overlaps
+            // we're looping to make sure that all cells between extremes are found
+            for (var cX = cXEntityMin; cX <= cXEntityMax; cX++) {
+                // make sure a column exists, initialize if not to grid height length
+                // NOTE: again, a purposeful use of the Array constructor
+                if (!this.grid[cX]) {
+                    this.grid[cX] = Array(cGridHeight);
+                }
+
+                var gridCol = this.grid[cX];
+
+                // loop through each cell in this column
+                for (var cY = cYEntityMin; cY <= cYEntityMax; cY++) {
+                    // ensure we have a bucket to put entities into for this cell
+                    if (!gridCol[cY]) {
+                        gridCol[cY] = [];
+
+                        // this is for stats purposes only
+                        this.allocatedCells += 1;
+                    }
+
+                    var gridCell = gridCol[cY];
+
+                    // add entity to cell
+                    gridCell.push(entity);
+
+                    // draw this grid cell since it has active entities
+                    // @TODO move to the draw method and dupe mapping sot it's
+                    // easily disabled
+                    ctx.fillStyle = 'rgba(255, 255, 0, 0.05)';
+                    ctx.fillRect(cX * this.pxCellSize, cY * this.pxCellSize, this.pxCellSize, this.pxCellSize);
+                }
+            }
+        }
+    };
+
+    SpatialGrid.prototype.addEntity = function addEntity(entity) {
+        this.entities.push(entity);
+    };
+
+    SpatialGrid.prototype.removeEntity = function removeEntity(entity) {
+        this.entities.splice(this.entities.indexOf(entity), 1);
+    };
+
+    SpatialGrid.prototype.queryForCollisionPairs = function queryForCollisionPairs() {
+        // store checked hash ids
+        var checked = {};
+
+        // store collision pairs
+        var pairs = [];
+
+        // reset counts, for debug/comparison purposes
+        this.collisionTests = 0;
+        this.hashChecks = 0;
+
+        // for every column in the grid...
+        for (var i = 0; i < this.grid.length; i++) {
+            var gridCol = this.grid[i];
+
+            // ignore columns that have no cells
+            if (!gridCol) {
+                continue;
+            }
+
+            // for every cell within a column of the grid...
+            for (var j = 0; j < gridCol.length; j++) {
+                var gridCell = gridCol[j];
+
+                // ignore cells that have no objects
+                if (!gridCell) {
+                    continue;
+                }
+
+                // for every object in a cell...
+                for (var k = 0; k < gridCell.length; k++) {
+                    var entityA = gridCell[k];
+
+                    // for every other object in a cell...
+                    for (var l = k + 1; l < gridCell.length; l++) {
+                        var entityB = gridCell[l];
+
+                        // create a unique key to mark this pair.
+                        // use both combinations to ensure linear time
+                        var hashA = entityA.id + ':' + entityB.id;
+                        var hashB = entityB.id + ':' + entityA.id;
+
+                        this.hashChecks += 2;
+                        // console.log(checked[hashA]);
+
+                        entityA.hit = false;
+                        entityB.hit = false;
+
+                        if (!checked[hashA] && !checked[hashB]) {
+
+                            // mark this pair has checked
+                            checked[hashA] = true;
+                            checked[hashB] = true;
+
+                            this.collisionTests += 1;
+
+                            if (this.aabb2DIntersection(entityA, entityB)) {
+                                pairs.push([entityA, entityB]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        pairs.map(function (pair) {
+            pair[0].hit = true;
+            pair[1].hit = true;
+        });
+
+        return pairs;
+    };
+
+    // this is taken verbatim from the BruteForceTech
+
+    SpatialGrid.prototype.aabb2DIntersection = function aabb2DIntersection(a, b) {
+        return Math.abs(a.bounds.x - b.bounds.x) * 2 < a.bounds.width + b.bounds.width && Math.abs(a.bounds.y - b.bounds.y) * 2 < a.bounds.height + b.bounds.height;
+    };
+
+    SpatialGrid.prototype.draw = function draw(ctx) {
+        var cGridWidth = Math.floor((this.max.x - this.min.x) / this.pxCellSize);
+        var cGridHeight = Math.floor((this.max.y - this.min.y) / this.pxCellSize);
+
+        ctx.save();
+        ctx.lineWidth = '1';
+        ctx.strokeStyle = 'rgba( 0, 200, 255, 0.1 )';
+
+        for (var i = 0; i < cGridWidth; i++) {
+            var x = this.min.x + i * this.pxCellSize;
+
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, this.max.y);
+            ctx.stroke();
+        }
+
+        for (var j = 0; j <= cGridHeight; j++) {
+            var y = this.min.y + j * this.pxCellSize;
+
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(this.max.x, y);
+            ctx.stroke();
+        }
+
+        ctx.restore();
+        ctx.fillStyle = 'rgba( 150, 95, 255, 0.5 )';
+        var size = 15 * DPR;
+        ctx.font = size + 'px "Lucida Console", Monaco, monospace';
+        ctx.fillText('Total Cells      : ' + this.totalCells, 25 * DPR, 30 * DPR);
+        ctx.fillText('Allocated Cells  : ' + this.allocatedCells, 25 * DPR, 60 * DPR);
+        ctx.fillText('Hash Checks      : ' + this.hashChecks, 25 * DPR, 90 * DPR);
+    };
+
+    return SpatialGrid;
+}();
+
+/*============================
+ * Particle Class
+ *===========================*/
+
+var Particle = function () {
+    function Particle(x, y, vx, vy, size) {
+        _classCallCheck(this, Particle);
+
+        this.velocity = {
+            x: vx,
+            y: vy
+        };
+        this.position = {
+            x: x,
+            y: y
+        };
+        this.bounds = {
+            x: x,
+            y: y,
+            width: size,
+            height: size
+        };
+        this.size = size;
+        this.width = size;
+        this.height = size;
+        this.decay = 0.05;
+        this.dead = false;
+    }
+
+    Particle.prototype.updateSize = function updateSize() {
+        this.size -= this.decay;
+        if (this.size <= 0) {
+            this.dead = true;
+        }
+    };
+
+    Particle.prototype.updatePosition = function updatePosition() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.bounds.x += this.velocity.x;
+        this.bounds.y += this.velocity.y;
+    };
+
+    Particle.prototype.draw = function draw(ctx) {
+        ctx.fillStyle = '#8054dd';
+        ctx.fillRect(this.position.x - this.size / 2, this.position.y - this.size / 2, this.size, this.size);
+    };
+
+    return Particle;
+}();
+
+function distance(x0, y0, x1, y1) {
+    // returns the length of a line segment
+    var x = x1 - x0;
+    var y = y1 - y0;
+    return Math.sqrt(x * x + y * y);
+}
+
+function doBoxesIntersect(a, b) {
+    // AABB axis-aligned bounding boxes
+    return Math.abs(a.position.x - b.position.x) * 2 < a.width + b.width && Math.abs(a.position.y - b.position.y) * 2 < a.height + b.height;
+}
+
+function getAngleDeg(x0, y0, x1, y1) {
+    // degrees = atan2(deltaY, deltaX) * (180 / PI)
+    var y = y1 - y0;
+    var x = x1 - x0;
+    return Math.atan2(y, x) * (180 / Math.PI);
+}
+
+function getAngleRadians(x0, y0, x1, y1) {
+    // radians = atan2(deltaY, deltaX)
+    var y = y1 - y0;
+    var x = x1 - x0;
+    return Math.atan2(y, x);
+}
+
+function movePointAtAngle(point, angle, distance) {
+    return {
+        x: point.x - Math.cos(angle) * distance,
+        y: point.y - Math.sin(angle) * distance
+    };
+}
+
+function generatePolygon(ctrX, ctrY) {
+    var aveRadius = arguments.length <= 2 || arguments[2] === undefined ? 100 : arguments[2];
+    var numVerts = arguments.length <= 3 || arguments[3] === undefined ? 6 : arguments[3];
+
+    // Ported from http://stackoverflow.com/a/25276331
+
+    var irregularity = 0.3;
+    var spikeyness = 0.1;
+
+    irregularity = clip(irregularity, 0, 1) * 2 * Math.PI / numVerts;
+    spikeyness = clip(spikeyness, 0, 1) * aveRadius;
+
+    // generate n angle steps
+    var angleSteps = [];
+    var lower = 2 * Math.PI / numVerts - irregularity;
+    var upper = 2 * Math.PI / numVerts + irregularity;
+    var sum = 0;
+
+    for (var i = 0; i < numVerts; i++) {
+        var tmp = getRandomInt(lower, upper);
+        angleSteps.push(tmp);
+        sum = sum + tmp;
+    }
+
+    // normalize the steps so that point 0 and point n+1 are the same
+    var k = sum / (2 * Math.PI);
+    for (var i = 0; i < numVerts; i++) {
+        angleSteps[i] = angleSteps[i] / k;
+    }
+
+    var points = [];
+    var angle = getRandomInt(0, 2 * Math.PI);
+
+    for (var i = 0; i < numVerts; i++) {
+        var r_i = clip(randomGauss(aveRadius, spikeyness), 0, 2 * aveRadius);
+        var x = ctrX + r_i * Math.cos(angle);
+        var y = ctrY + r_i * Math.sin(angle);
+        points.push({
+            x: x,
+            y: y
+        });
+
+        angle = angle + angleSteps[i];
+    }
+
+    return points;
+}
+
+function clip(x, min, max) {
+    if (min > max) {
+        return x;
+    } else if (x < min) {
+        return min;
+    } else if (x > max) {
+        return max;
+    } else {
+        return x;
+    }
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomGauss(mu, sigma, nsamples) {
+    // http://stackoverflow.com/a/33567961
+    if (!nsamples) nsamples = 6;
+    if (!sigma) sigma = 1;
+    if (!mu) mu = 0;
+
+    var run_total = 0;
+    for (var i = 0; i < nsamples; i++) {
+        run_total += Math.random();
+    }
+
+    return sigma * (run_total - nsamples / 2) / (nsamples / 2) + mu;
+}
+
+var canvas = new Canvas();
+</script>
+</html>
